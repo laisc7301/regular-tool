@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>552</width>
-    <height>436</height>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,16 +27,16 @@
       <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_2">
        <property name="text">
-        <string>查找</string>
+        <string>上一个</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>test</string>
+        <string>下一个</string>
        </property>
       </widget>
      </item>
@@ -44,6 +44,9 @@
    </item>
    <item>
     <widget class="QTextEdit" name="textEdit"/>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="textEdit_2"/>
    </item>
   </layout>
  </widget>

@@ -6,11 +6,16 @@
 #include "global.h"
 #include <QSettings>
 
+
 regex_find::regex_find(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::regex_find)
 {
     ui->setupUi(this);
+    ui->textEdit_2->setVisible(false);
+    //ui->pushButton->setVisible(false);
+
+    ui->textEdit->setStyleSheet("selection-background-color: #0078d7;selection-color: white;");
 
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     QString str1 = mysetting->value("regexFind/RegularExpressionStr").toString();
@@ -31,36 +36,24 @@ regex_find::~regex_find()
 
 void regex_find::on_pushButton_2_clicked()
 {
-//    QString str = ui->lineEdit->text();
-//    ui->textEdit->find(str);
-
-//    QTextCursor cursor = ui->textEdit->textCursor();
-
-//    std::cout << cursor.columnNumber() << std::endl;
-
-
-//std::cout<<ui->textEdit->toPlainText().toStdString()<< std::endl;
-
-    ui->textEdit->setHtml("<style>#test{color: red;}</style><b id=\"test\">123</b>\n333");
-    //ui->textEdit->setText("123\n333");
-    qDebug()<<ui->textEdit->toPlainText();
-}
-
-
-void regex_find::on_pushButton_clicked()
-{
+    search();
     QString myRegularExpressionStr = ui->lineEdit->text();
-    QString myInputStr = ui->textEdit->toPlainText();
-
-    if(false){
-    myInputStr = "A <i>bon mot</i>.";
-    myRegularExpressionStr="<i>([^<]*)</i>";
     QRegularExpression regularExpression(myRegularExpressionStr);
-    myInputStr.replace(regularExpression,"\\emph{\\1}");
-    std::cout<<myInputStr.toStdString()<<std::endl;
-    }
-    QString myRegularExpressionStr2 = "("+myRegularExpressionStr+")";
+    ui->textEdit->find(regularExpression,QTextDocument::FindBackward);
 }
+
+void regex_find::on_pushButton_3_clicked()
+{
+    search();
+    QString myRegularExpressionStr = ui->lineEdit->text();
+    QRegularExpression regularExpression(myRegularExpressionStr);
+    ui->textEdit->find(regularExpression);
+}
+
+//void regex_find::on_pushButton_clicked()
+//{
+//    search();
+//}
 
 
 void regex_find::on_lineEdit_textChanged(const QString &arg1)
@@ -74,5 +67,29 @@ void regex_find::on_textEdit_textChanged()
 {
     regex_find_SearchStr = ui->textEdit->toPlainText();
     isRegexFind_SearchStrChange = true;
+
+}
+
+
+void regex_find::search()
+{
+
+    QString myRegularExpressionStr = ui->lineEdit->text();
+    QString myInputStr = ui->textEdit->toPlainText();
+
+    QString myRegularExpressionStr2 = "("+myRegularExpressionStr+")";
+    QRegularExpression regularExpression(myRegularExpressionStr2);
+    myInputStr.replace(regularExpression,"<b id=\"result\">\\1</b>");
+    myInputStr.replace("\n","<br/>");
+    QString style = "<style>#result{color: red;background-color: yellow;}</style>";
+    myInputStr = style + myInputStr;
+    QString str1 = ui->textEdit->toHtml();
+    ui->textEdit_2->setHtml(myInputStr);
+    if(ui->textEdit->toHtml()!= ui->textEdit_2->toHtml()){
+        ui->textEdit->setHtml(myInputStr);
+    }
+
+
+
 }
 
