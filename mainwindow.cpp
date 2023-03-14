@@ -94,6 +94,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     regex_replacement_replaceInput = mysetting->value("regularExpression/replaceInput").toString();
 
+    regex_match_regularExpressionStr = mysetting->value("regexMatch/regularExpressionStr").toString();
+
+    regex_match_inputStr = mysetting->value("regexMatch/inputStr").toString();
+
+    regex_find_regularExpressionStr = mysetting->value("regexFind/RegularExpressionStr").toString();
+
+    regex_find_SearchStr = mysetting->value("regexFind/SearchStr").toString();
+
     connect(timer2,&QTimer::timeout,this,[=](){
 
         //std::cout << "time" << std::endl;
@@ -123,6 +131,16 @@ MainWindow::MainWindow(QWidget *parent)
 
             mysetting->setValue("regexMatch/inputStr",regex_match_inputStr);
         }
+        if(isRegexFind_RegularExpressionStrChange){
+            isRegexFind_RegularExpressionStrChange = false;
+
+            mysetting->setValue("regexFind/RegularExpressionStr",regex_find_regularExpressionStr);
+        }
+        if(isRegexFind_SearchStrChange){
+            isRegexFind_SearchStrChange = false;
+
+            mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
+        }
     });
     timer2->start(1000);
 
@@ -130,7 +148,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+
     qDebug()<<regex_replacement_regularExpression;
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     mysetting->setValue("regularExpression/regularExpression",regex_replacement_regularExpression);
@@ -140,5 +158,9 @@ MainWindow::~MainWindow()
 
     mysetting->setValue("regexMatch/regularExpressionStr",regex_match_regularExpressionStr);
     mysetting->setValue("regexMatch/inputStr",regex_match_inputStr);
+
+    mysetting->setValue("regexFind/RegularExpressionStr",regex_find_regularExpressionStr);
+    mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
+    delete ui;
 }
 

@@ -16,4 +16,11 @@ extern QString regex_match_inputStr;
 
 extern bool isRegexMatch_RegularExpressionStrChange;
 extern bool isRegexMatch_InputStrChange;
+
+
+extern QString regex_find_regularExpressionStr;
+extern QString regex_find_SearchStr;
+
+extern bool isRegexFind_RegularExpressionStrChange;
+extern bool isRegexFind_SearchStrChange;
 #endif // GLOBAL_H

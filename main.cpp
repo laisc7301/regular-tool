@@ -18,6 +18,12 @@ QString regex_match_inputStr = "";
 bool isRegexMatch_RegularExpressionStrChange = false;
 bool isRegexMatch_InputStrChange = false;
 
+QString regex_find_regularExpressionStr = "";
+QString regex_find_SearchStr = "";
+
+bool isRegexFind_RegularExpressionStrChange = false;
+bool isRegexFind_SearchStrChange = false;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

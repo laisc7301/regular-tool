@@ -52,6 +52,7 @@ void regex_match::on_pushButton_clicked()
     QString result2 = "";
     for(;endIndex < inputStr.length();){
         match = regularExpression.match(inputStr, endIndex);
+
         if(match.hasMatch()) {
             startIndex = match.capturedStart();
             length = match.capturedLength();
