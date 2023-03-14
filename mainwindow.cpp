@@ -79,13 +79,6 @@ MainWindow::MainWindow(QWidget *parent)
         About2->show();
     });
 
-    QTimer *timer = new QTimer();
-    connect(timer,&QTimer::timeout,this,[=](){
-
-        toolBar->show();
-
-    });
-    timer->start(1000);
 
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     regex_replacement_regularExpression = mysetting->value("regularExpression/regularExpression").toString();

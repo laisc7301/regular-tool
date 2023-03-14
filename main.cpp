@@ -3,6 +3,8 @@
 #include <QApplication>
 #include "global.h"
 
+QString version = "v1.0.0";
+
 QString regex_replacement_regularExpression = "";
 QString regex_replacement_replace = "";
 QString regex_replacement_replaceInput = "";

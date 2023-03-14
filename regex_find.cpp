@@ -87,6 +87,7 @@ void regex_find::search()
     ui->textEdit_2->setHtml(myInputStr);
     if(ui->textEdit->toHtml()!= ui->textEdit_2->toHtml()){
         ui->textEdit->setHtml(myInputStr);
+        //qDebug()<<"change!";
     }
 
 

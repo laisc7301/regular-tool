@@ -1,7 +1,7 @@
 #include "about.h"
 #include "ui_about.h"
 #include <QMessageBox>
-
+#include "global.h"
 
 About::About(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +11,11 @@ About::About(QWidget *parent) :
 
     ui->label_4->setOpenExternalLinks(true);
     ui->label_6->setOpenExternalLinks(true);
+    QString qtVersion = QT_VERSION_STR;
+    QString qtVersionOut = "基于Qt" + qtVersion + "开发";
+    ui->label_2->setText(qtVersionOut);
+
+    ui->label_7->setText(version);
 
 }
 
