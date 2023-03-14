@@ -15,6 +15,13 @@ public:
     explicit regex_match(QWidget *parent = nullptr);
     ~regex_match();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_textEdit_textChanged();
+
 private:
     Ui::regex_match *ui;
 };

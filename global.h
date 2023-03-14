@@ -4,6 +4,16 @@
 extern QString regex_replacement_regularExpression;
 extern QString regex_replacement_replace;
 extern QString regex_replacement_replaceInput;
-extern QString globaltest;
 
+extern bool isRegexReplacement_RegularExpressionChange;
+extern bool isRegexReplacement_ReplaceChange;
+extern bool isRegexReplacement_ReplaceInputChange;
+
+
+//extern QString globaltest;
+extern QString regex_match_regularExpressionStr;
+extern QString regex_match_inputStr;
+
+extern bool isRegexMatch_RegularExpressionStrChange;
+extern bool isRegexMatch_InputStrChange;
 #endif // GLOBAL_H
