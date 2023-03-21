@@ -14,7 +14,8 @@ SOURCES += \
     mainwindow.cpp \
     regex_find.cpp \
     regex_match.cpp \
-    regex_replacement.cpp
+    regex_replacement.cpp \
+    regular_file_search.cpp
 
 HEADERS += \
     about.h \
@@ -22,14 +23,16 @@ HEADERS += \
     mainwindow.h \
     regex_find.h \
     regex_match.h \
-    regex_replacement.h
+    regex_replacement.h \
+    regular_file_search.h
 
 FORMS += \
     about.ui \
     mainwindow.ui \
     regex_find.ui \
     regex_match.ui \
-    regex_replacement.ui
+    regex_replacement.ui \
+    regular_file_search.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

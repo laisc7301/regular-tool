@@ -17,6 +17,8 @@
 #include "regex_match.h"
 #include "regex_find.h"
 #include "about.h"
+#include "regular_file_search.h"
+
 
 #include <QMdiSubWindow>
 
@@ -58,22 +60,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     });
 
-    //        QAction *m4 = ui->mainToolBar->addAction("关于");
-    //        connect(m4,&QAction::triggered,this,[=](){
+    QAction *m4 = toolBar->addAction("正则文件查找");
+    connect(m4,&QAction::triggered,this,[=](){
 
-    //            About *About1 = new About();
+        Regular_file_search *regular_file_search1 = new Regular_file_search();
+        QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_search1);
+        subWindow1->show();
+        //subWindow1->resize(QSize(550,250));
 
-    //            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(About1);
-    //            subWindow1->show();
+    });
 
-    //            //subWindow1->resize(QSize(550,250));
-    //            //setAttribute(Qt::WA_DeleteOnClose)
-    //            //QMessageBox::aboutQt(NULL, "About Qt");
-
-    //        });
-
-    QAction *m5 = toolBar->addAction("关于");
-    connect(m5,&QAction::triggered,this,[=](){
+    QAction *m6 = toolBar->addAction("关于");
+    connect(m6,&QAction::triggered,this,[=](){
 
         About *About2 = new About();
         About2->show();
@@ -94,6 +92,10 @@ MainWindow::MainWindow(QWidget *parent)
     regex_find_regularExpressionStr = mysetting->value("regexFind/RegularExpressionStr").toString();
 
     regex_find_SearchStr = mysetting->value("regexFind/SearchStr").toString();
+
+    regular_file_search_regularExpressionStr = mysetting->value("regularFileSearch/regularExpressionStr").toString();
+
+    regular_file_search_fileExtension = mysetting->value("regularFileSearch/fileExtension").toString();
 
     connect(timer2,&QTimer::timeout,this,[=](){
 
@@ -134,6 +136,18 @@ MainWindow::MainWindow(QWidget *parent)
 
             mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
         }
+
+        if(isRegularFileSearch_FileExtensionChange){
+            isRegularFileSearch_FileExtensionChange = false;
+
+            mysetting->setValue("regularFileSearch/fileExtension",regular_file_search_fileExtension);
+        }
+
+        if(isRegularFileSearch_RegularExpressionStrChange){
+            isRegularFileSearch_RegularExpressionStrChange = false;
+
+            mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
+        }
     });
     timer2->start(1000);
 
@@ -154,6 +168,9 @@ MainWindow::~MainWindow()
 
     mysetting->setValue("regexFind/RegularExpressionStr",regex_find_regularExpressionStr);
     mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
+
+    mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
+    mysetting->setValue("regularFileSearch/fileExtension",regular_file_search_fileExtension);
     delete ui;
 }
 

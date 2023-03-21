@@ -3,7 +3,7 @@
 #include <QApplication>
 #include "global.h"
 
-QString version = "v1.0.0";
+QString version = "v1.1.0";
 
 QString regex_replacement_regularExpression = "";
 QString regex_replacement_replace = "";
@@ -25,6 +25,13 @@ QString regex_find_SearchStr = "";
 
 bool isRegexFind_RegularExpressionStrChange = false;
 bool isRegexFind_SearchStrChange = false;
+
+QString regular_file_search_fileExtension = "";
+QString regular_file_search_regularExpressionStr = "";
+bool isRegularFileSearch_FileExtensionChange = false;
+bool isRegularFileSearch_RegularExpressionStrChange = false;
+
+
 
 int main(int argc, char *argv[])
 {

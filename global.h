@@ -25,4 +25,12 @@ extern QString regex_find_SearchStr;
 
 extern bool isRegexFind_RegularExpressionStrChange;
 extern bool isRegexFind_SearchStrChange;
+
+extern QString regular_file_search_regularExpressionStr;
+extern QString regular_file_search_fileExtension;
+extern bool isRegularFileSearch_RegularExpressionStrChange;
+extern bool isRegularFileSearch_FileExtensionChange;
+
 #endif // GLOBAL_H
+
+
