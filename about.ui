@@ -187,7 +187,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>源代码：&lt;a href=&quot;https://github.com/laisc7301/regular-tool-with-qt/&quot;&gt;https://github.com/laisc7301/regular-tool-with-qt/&lt;/a&gt;</string>
+        <string>源代码：&lt;a href=&quot;https://github.com/laisc7301/regular-tool/&quot;&gt;https://github.com/laisc7301/regular-tool/&lt;/a&gt;</string>
        </property>
       </widget>
      </item>
