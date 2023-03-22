@@ -37,11 +37,13 @@ void replacement_thread::doReplace(){
         QString fileContent = getfileContent(fileurl);
         fileContent.replace(QRegularExpression(regularExpression),replace);
         writeFile(fileurl,fileContent);
+        //QThread::sleep(1);
         int progressRate = (i+1)*100/list.size();
         emit setProgressBar(progressRate);
     }
     emit setProgressBar(100);
     emit sendmsg("完成！");
+    emit finish();
 }
 
 QString replacement_thread::getfileContent(const QString &url){

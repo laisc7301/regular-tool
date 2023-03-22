@@ -16,7 +16,7 @@ Regular_file_replacement::Regular_file_replacement(QWidget *parent) :
     ui->setupUi(this);
     QObject::connect(&thread, SIGNAL(sendmsg(QString)), this, SLOT(getmsg(QString)));
     QObject::connect(&thread, SIGNAL(setProgressBar(int)), this, SLOT(setProgressBar(int)));
-
+    QObject::connect(&thread, SIGNAL(finish()), this, SLOT(threadFinish()));
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     QString fileExtension = mysetting->value("regularFileReplacement/fileExtension").toString();
     if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
@@ -53,7 +53,9 @@ void Regular_file_replacement::setProgressBar(int value)
 
 }
 
-
+void Regular_file_replacement::threadFinish(){
+    ui->pushButton_2->setEnabled(true);
+}
 
 
 
@@ -85,9 +87,7 @@ void Regular_file_replacement::on_pushButton_2_clicked()
         return;
     }
 
-
-
-
+    ui->pushButton_2->setEnabled(false);
 
     thread.url = ui->lineEdit->text();
     thread.filter = ui->lineEdit_2->text();

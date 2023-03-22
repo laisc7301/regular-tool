@@ -21,6 +21,8 @@ public slots:
 
     void setProgressBar(int value);
 
+    void threadFinish();
+
 private slots:
 
     void on_pushButton_clicked();

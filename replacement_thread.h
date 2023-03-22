@@ -21,6 +21,7 @@ public:
 signals:
     void sendmsg(QString msg);
     void setProgressBar(int value);
+    void finish();
 private:
     void doReplace();
     void writeFile(const QString &url,const QString &content);
