@@ -46,8 +46,8 @@ void Regular_file_search::on_pushButton_2_clicked()
     QString dirpath = ui->lineEdit->text();
     //设置要遍历的目录
     QString filter = ui->lineEdit_2->text();
-    QStringList filterlist = filter.split(",");
-    QStringList fileList = getFileListUnderDir(dirpath,filterlist);
+
+    QStringList fileList = getFileListUnderDir(dirpath,filter);
 
 
     QString out1="";
@@ -78,9 +78,9 @@ void Regular_file_search::on_pushButton_2_clicked()
 
         QString inputStr = fileContentString;
         QString regularExpressionStr = ui->lineEdit_3->text();
-        //QString pattern("23[0-9]");
+
         QRegularExpression regularExpression(regularExpressionStr);
-        //QString inputStr("12392345");
+
 
         QRegularExpressionMatch match;
         int startIndex = 0;
@@ -125,7 +125,7 @@ void Regular_file_search::on_pushButton_2_clicked()
 
 
 
-QStringList Regular_file_search::getFileListUnderDir(const QString &dirPath,const QStringList filterlist)
+QStringList Regular_file_search::getFileListUnderDir(const QString &dirPath,const QString &filter)
 {
     QStringList fileList;
     QDir dir(dirPath);
@@ -133,22 +133,30 @@ QStringList Regular_file_search::getFileListUnderDir(const QString &dirPath,cons
     foreach (auto fileInfo, fileInfoList) {
         if(fileInfo.isDir())
         {
-            QStringList fileList2 = getFileListUnderDir(fileInfo.absoluteFilePath(),filterlist);
+            QStringList fileList2 = getFileListUnderDir(fileInfo.absoluteFilePath(),filter);
             fileList.append(fileList2);
         }
+        if(filter==""){
+            fileList.append(fileInfo.absoluteFilePath());
 
-        if(fileInfo.isFile())
-        {
-            QFileInfo fi(fileInfo.absoluteFilePath());
+        }else{
+            QStringList filterlist = filter.split(",");
+            if(fileInfo.isFile())
+            {
 
-            QString ext= fi.suffix();
+                QFileInfo fi(fileInfo.absoluteFilePath());
 
-            foreach (auto filter, filterlist) {
-                if(filter==ext){
-                    fileList.append(fileInfo.absoluteFilePath());
+                QString ext= fi.suffix();
+
+
+                foreach (auto filter, filterlist) {
+                    if(filter==ext){
+                        fileList.append(fileInfo.absoluteFilePath());
+                    }
                 }
             }
         }
+
     }
     return fileList;
 }

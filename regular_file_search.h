@@ -20,7 +20,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    QStringList getFileListUnderDir(const QString &dirPath,const QStringList filterlist);
+    QStringList getFileListUnderDir(const QString &dirPath,const QString &filter);
 
     void on_lineEdit_3_textChanged(const QString &arg1);
 

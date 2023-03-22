@@ -31,6 +31,13 @@ extern QString regular_file_search_fileExtension;
 extern bool isRegularFileSearch_RegularExpressionStrChange;
 extern bool isRegularFileSearch_FileExtensionChange;
 
+
+extern QString regular_file_replacement_fileExtension;
+extern QString regular_file_replacement_regularExpressionStr;
+extern QString regular_file_replacement_replace;
+extern bool isRegularFileReplacement_FileExtensionChange;
+extern bool isRegularFileReplacement_RegularExpressionStrChange;
+extern bool isRegularFileReplacement_ReplaceChange;
 #endif // GLOBAL_H
 
 

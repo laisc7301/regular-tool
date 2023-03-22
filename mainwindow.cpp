@@ -18,7 +18,7 @@
 #include "regex_find.h"
 #include "about.h"
 #include "regular_file_search.h"
-
+#include "regular_file_replacement.h"
 
 #include <QMdiSubWindow>
 
@@ -65,6 +65,16 @@ MainWindow::MainWindow(QWidget *parent)
 
         Regular_file_search *regular_file_search1 = new Regular_file_search();
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_search1);
+        subWindow1->show();
+        //subWindow1->resize(QSize(550,250));
+
+    });
+
+    QAction *m5 = toolBar->addAction("正则文件替换");
+    connect(m5,&QAction::triggered,this,[=](){
+
+        Regular_file_replacement *regular_file_replacement1 = new Regular_file_replacement();
+        QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_replacement1);
         subWindow1->show();
         //subWindow1->resize(QSize(550,250));
 
@@ -148,6 +158,23 @@ MainWindow::MainWindow(QWidget *parent)
 
             mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
         }
+
+        if(isRegularFileReplacement_FileExtensionChange){
+            isRegularFileReplacement_FileExtensionChange = false;
+
+            mysetting->setValue("regularFileReplacement/fileExtension",regular_file_replacement_fileExtension);
+        }
+        if(isRegularFileReplacement_RegularExpressionStrChange){
+            isRegularFileReplacement_RegularExpressionStrChange = false;
+
+            mysetting->setValue("regularFileReplacement/regularExpression",regular_file_replacement_regularExpressionStr);
+        }
+        if(isRegularFileReplacement_ReplaceChange){
+            isRegularFileReplacement_ReplaceChange = false;
+
+            mysetting->setValue("regularFileReplacement/replace",regular_file_replacement_replace);
+        }
+
     });
     timer2->start(1000);
 
@@ -171,6 +198,11 @@ MainWindow::~MainWindow()
 
     mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
     mysetting->setValue("regularFileSearch/fileExtension",regular_file_search_fileExtension);
+
+    mysetting->setValue("regularFileReplacement/fileExtension",regular_file_replacement_fileExtension);
+    mysetting->setValue("regularFileReplacement/regularExpression",regular_file_replacement_regularExpressionStr);
+    mysetting->setValue("regularFileReplacement/replace",regular_file_replacement_replace);
+
     delete ui;
 }
 
