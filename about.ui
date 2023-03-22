@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>467</width>
+    <width>464</width>
     <height>266</height>
    </rect>
   </property>
@@ -39,7 +39,7 @@
         </font>
        </property>
        <property name="text">
-        <string>正则小工具</string>
+        <string>睿火正则小工具</string>
        </property>
       </widget>
      </item>
@@ -187,7 +187,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>源代码：&lt;a href=&quot;https://github.com/laisc7301/regular-tool/&quot;&gt;https://github.com/laisc7301/regular-tool/&lt;/a&gt;</string>
+        <string>源代码：&lt;a href=&quot;https://github.com/laisc7301/wisefire-regular-tool&quot;&gt;https://github.com/laisc7301/wisefire-regular-tool&lt;/a&gt;</string>
        </property>
       </widget>
      </item>
