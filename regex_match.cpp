@@ -90,3 +90,9 @@ void regex_match::on_textEdit_textChanged()
     isRegexMatch_InputStrChange = true;
 }
 
+
+void regex_match::on_toolButton_clicked()
+{
+    qmdiArea->closeActiveSubWindow();
+}
+

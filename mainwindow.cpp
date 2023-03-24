@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    qmdiArea = ui->mdiArea;
+
+    ui->mdiArea->setViewMode(QMdiArea::TabbedView);
+
     QToolBar *toolBar = new QToolBar();
     addToolBar(toolBar);
 

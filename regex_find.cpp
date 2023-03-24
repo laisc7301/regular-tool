@@ -12,6 +12,10 @@ regex_find::regex_find(QWidget *parent) :
     ui(new Ui::regex_find)
 {
     ui->setupUi(this);
+//    QImage image("close.png");
+//    ui->label_2->setPixmap(QPixmap::fromImage(image));
+
+
     ui->textEdit_2->setVisible(false);
     //ui->pushButton->setVisible(false);
 
@@ -92,5 +96,11 @@ void regex_find::search()
 
 
 
+}
+
+
+void regex_find::on_toolButton_clicked()
+{
+    qmdiArea->closeActiveSubWindow();
 }
 

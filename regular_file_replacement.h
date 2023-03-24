@@ -35,6 +35,8 @@ private slots:
 
     void on_lineEdit_4_textChanged(const QString &arg1);
 
+    void on_toolButton_clicked();
+
 private:
     Ui::Regular_file_replacement *ui;
 

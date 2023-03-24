@@ -28,6 +28,8 @@ private slots:
 
     void search();
 
+    void on_toolButton_clicked();
+
 private:
     Ui::regex_find *ui;
 };

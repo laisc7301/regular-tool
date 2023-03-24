@@ -175,3 +175,9 @@ void Regular_file_search::on_lineEdit_2_textChanged(const QString &arg1)
     isRegularFileSearch_FileExtensionChange = true;
 }
 
+
+void Regular_file_search::on_toolButton_clicked()
+{
+    qmdiArea->closeActiveSubWindow();
+}
+

@@ -26,6 +26,8 @@ private slots:
 
     void on_lineEdit_2_textChanged(const QString &arg1);
 
+    void on_toolButton_clicked();
+
 private:
     Ui::Regular_file_search *ui;
 };

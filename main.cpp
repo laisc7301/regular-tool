@@ -3,7 +3,8 @@
 #include <QApplication>
 #include "global.h"
 
-QString version = "v1.2.1";
+QString version = "v1.2.2";
+QMdiArea *qmdiArea = NULL;
 
 QString regex_replacement_regularExpression = "";
 QString regex_replacement_replace = "";

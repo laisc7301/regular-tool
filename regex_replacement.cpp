@@ -112,3 +112,9 @@ void regex_replacement::on_textEdit_textChanged()
     isRegexReplacement_ReplaceInputChange = true;
 }
 
+
+void regex_replacement::on_toolButton_clicked()
+{
+    qmdiArea->closeActiveSubWindow();
+}
+

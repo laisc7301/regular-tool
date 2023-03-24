@@ -1,7 +1,9 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
+#include <QMdiArea>
 
 extern QString version;
+extern QMdiArea *qmdiArea;
 
 extern QString regex_replacement_regularExpression;
 extern QString regex_replacement_replace;

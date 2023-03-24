@@ -26,6 +26,8 @@ private slots:
 
     void on_textEdit_textChanged();
 
+    void on_toolButton_clicked();
+
 private:
     Ui::regex_replacement *ui;
 };

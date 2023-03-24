@@ -117,3 +117,9 @@ void Regular_file_replacement::on_lineEdit_4_textChanged(const QString &arg1)
     isRegularFileReplacement_ReplaceChange = true;
 }
 
+
+void Regular_file_replacement::on_toolButton_clicked()
+{
+    qmdiArea->closeActiveSubWindow();
+}
+
