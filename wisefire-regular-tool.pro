@@ -13,6 +13,7 @@ SOURCES += \
     about.cpp \
     main.cpp \
     mainwindow.cpp \
+    mainwindow_thread.cpp \
     regex_find.cpp \
     regex_match.cpp \
     regex_replacement.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     about.h \
     global.h \
     mainwindow.h \
+    mainwindow_thread.h \
     regex_find.h \
     regex_match.h \
     regex_replacement.h \

@@ -69,7 +69,7 @@ regex_replacement::~regex_replacement()
     mysetting->setValue("regularExpression/replaceInput",str3);
 
 
-
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -115,6 +115,10 @@ void regex_replacement::on_textEdit_textChanged()
 
 void regex_replacement::on_toolButton_clicked()
 {
+    myMainWindow->removeid(id);
     qmdiArea->closeActiveSubWindow();
+}
+void regex_replacement::saveContent(){
+
 }
 

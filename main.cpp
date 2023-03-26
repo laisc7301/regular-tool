@@ -1,10 +1,15 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QWidget>
 #include "global.h"
 
 QString version = "v1.2.2";
+MainWindow *myMainWindow;
 QMdiArea *qmdiArea = NULL;
+QSettings *myconfig = new QSettings("config.ini", QSettings::IniFormat);
+QStringList tagList;
+QList<QWidget*> widgetList;
 
 QString regex_replacement_regularExpression = "";
 QString regex_replacement_replace = "";
@@ -43,6 +48,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    myMainWindow=&w;
     w.show();
     return a.exec();
 }

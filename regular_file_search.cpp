@@ -29,6 +29,7 @@ Regular_file_search::~Regular_file_search()
     QString regularExpressionStr = ui->lineEdit_3->text();
     mysetting->setValue("regularFileSearch/regularExpressionStr",regularExpressionStr);
 
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -178,6 +179,10 @@ void Regular_file_search::on_lineEdit_2_textChanged(const QString &arg1)
 
 void Regular_file_search::on_toolButton_clicked()
 {
+    myMainWindow->removeid(id);
     qmdiArea->closeActiveSubWindow();
 }
 
+void Regular_file_search::saveContent(){
+
+}

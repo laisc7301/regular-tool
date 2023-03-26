@@ -35,6 +35,8 @@ regex_find::~regex_find()
     mysetting->setValue("regexFind/regularExpressionStr",str1);
     QString str2 = ui->textEdit->toPlainText();
     mysetting->setValue("regexFind/SearchStr",str2);
+
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -101,6 +103,12 @@ void regex_find::search()
 
 void regex_find::on_toolButton_clicked()
 {
+    myMainWindow->removeid(id);
+
     qmdiArea->closeActiveSubWindow();
+}
+
+void regex_find::saveContent(){
+
 }
 

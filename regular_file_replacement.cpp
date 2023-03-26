@@ -38,7 +38,7 @@ Regular_file_replacement::~Regular_file_replacement()
     QString replace = ui->lineEdit_4->text();
     mysetting->setValue("regularFileReplacement/replace",replace);
 
-
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -120,6 +120,9 @@ void Regular_file_replacement::on_lineEdit_4_textChanged(const QString &arg1)
 
 void Regular_file_replacement::on_toolButton_clicked()
 {
+    myMainWindow->removeid(id);
     qmdiArea->closeActiveSubWindow();
 }
+void Regular_file_replacement::saveContent(){
 
+}

@@ -15,6 +15,10 @@ public:
     explicit Regular_file_search(QWidget *parent = nullptr);
     ~Regular_file_search();
 
+    int id=0;
+    void saveContent();
+
+
 private slots:
     void on_pushButton_clicked();
 

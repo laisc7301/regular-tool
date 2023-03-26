@@ -16,6 +16,10 @@ public:
     explicit Regular_file_replacement(QWidget *parent = nullptr);
     ~Regular_file_replacement();
 
+    int id=0;
+    void saveContent();
+
+
 public slots:
     void getmsg(QString msg);
 

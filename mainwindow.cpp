@@ -23,7 +23,7 @@
 #include <QMdiSubWindow>
 
 QTimer *timer2 = new QTimer();
-
+//QSettings *myconfig = new QSettings("config.ini", QSettings::IniFormat);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,16 +34,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->mdiArea->setViewMode(QMdiArea::TabbedView);
 
+
     QToolBar *toolBar = new QToolBar();
     addToolBar(toolBar);
-
-
+    showTag();
     QAction *m1 = toolBar->addAction("正则查找");
     connect(m1,&QAction::triggered,this,[=](){
         //std::cout << "new action" << std::endl;
         regex_find *regex_find1 = new regex_find;
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_find1);
         subWindow1->show();
+        tagList.append("regex_find");
+        regex_find1->id = nextId++;
+        widgetList.append(regex_find1);
+        saveTag();
     });
 
     QAction *m2 = toolBar->addAction("正则匹配");
@@ -52,6 +56,10 @@ MainWindow::MainWindow(QWidget *parent)
         regex_match *regex_match1 = new regex_match;
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_match1);
         subWindow1->show();
+        tagList.append("regex_match");
+        regex_match1->id=nextId++;
+        widgetList.append(regex_match1);
+        saveTag();
     });
 
     QAction *m3 = toolBar->addAction("正则替换");
@@ -61,7 +69,10 @@ MainWindow::MainWindow(QWidget *parent)
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_replacement1);
         subWindow1->show();
         //subWindow1->resize(QSize(550,250));
-
+        tagList.append("regex_replacement");
+        regex_replacement1->id=nextId++;
+        widgetList.append(regex_replacement1);
+        saveTag();
     });
 
     QAction *m4 = toolBar->addAction("正则文件查找");
@@ -71,7 +82,10 @@ MainWindow::MainWindow(QWidget *parent)
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_search1);
         subWindow1->show();
         //subWindow1->resize(QSize(550,250));
-
+        tagList.append("Regular_file_search");
+        regular_file_search1->id=nextId++;
+        widgetList.append(regular_file_search1);
+        saveTag();
     });
 
     QAction *m5 = toolBar->addAction("正则文件替换");
@@ -80,6 +94,10 @@ MainWindow::MainWindow(QWidget *parent)
         Regular_file_replacement *regular_file_replacement1 = new Regular_file_replacement();
         QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_replacement1);
         subWindow1->show();
+        tagList.append("Regular_file_replacement");
+        regular_file_replacement1->id=nextId++;
+        widgetList.append(regular_file_replacement1);
+        saveTag();
         //subWindow1->resize(QSize(550,250));
 
     });
@@ -90,6 +108,13 @@ MainWindow::MainWindow(QWidget *parent)
         About *About2 = new About();
         About2->show();
     });
+
+//    QAction *m7 = toolBar->addAction("测试");
+//    connect(m7,&QAction::triggered,this,[=](){
+//        qDebug()<<widgetList;
+//        printIdList();
+//    });
+
 
 
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
@@ -186,8 +211,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-
-    qDebug()<<regex_replacement_regularExpression;
+    //saveTag();
+    //myconfig->setValue("mainwindow/tagList",tagList.join(","));
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     mysetting->setValue("regularExpression/regularExpression",regex_replacement_regularExpression);
     mysetting->setValue("regularExpression/replace",regex_replacement_replace);
@@ -207,6 +232,124 @@ MainWindow::~MainWindow()
     mysetting->setValue("regularFileReplacement/regularExpression",regular_file_replacement_regularExpressionStr);
     mysetting->setValue("regularFileReplacement/replace",regular_file_replacement_replace);
 
+
     delete ui;
 }
 
+void MainWindow::showTag(){
+
+
+    QStringList tag0 = myconfig->value("mainwindow/tagList").toString().split(",");
+    for(int i=0;i<tag0.size();i++){
+        QString tagName = tag0.at(i);
+
+        if(tagName=="regex_find"){
+            regex_find *regex_find1 = new regex_find;
+            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_find1);
+            subWindow1->show();
+            tagList.append("regex_find");
+            widgetList.append(regex_find1);
+            regex_find1->id=nextId++;
+        }else if(tagName=="regex_match"){
+            regex_match *regex_match1 = new regex_match;
+            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_match1);
+            subWindow1->show();
+            tagList.append("regex_match");
+            widgetList.append(regex_match1);
+            regex_match1->id=nextId++;
+        }else if(tagName=="regex_replacement"){
+            regex_replacement *regex_replacement1 = new regex_replacement();
+            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regex_replacement1);
+            subWindow1->show();
+            tagList.append("regex_replacement");
+            widgetList.append(regex_replacement1);
+            regex_replacement1->id=nextId++;
+        }else if(tagName=="Regular_file_search"){
+            Regular_file_search *regular_file_search1 = new Regular_file_search();
+            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_search1);
+            subWindow1->show();
+            tagList.append("Regular_file_search");
+            widgetList.append(regular_file_search1);
+            regular_file_search1->id=nextId++;
+        }else if(tagName=="Regular_file_replacement"){
+            Regular_file_replacement *regular_file_replacement1 = new Regular_file_replacement();
+            QMdiSubWindow *subWindow1 = ui->mdiArea->addSubWindow(regular_file_replacement1);
+            subWindow1->show();
+            tagList.append("Regular_file_replacement");
+            widgetList.append(regular_file_replacement1);
+            regular_file_replacement1->id=nextId++;
+        }
+    }
+}
+
+
+void MainWindow::saveTag(){
+    qDebug()<<tagList.join(",");
+
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
+}
+
+void MainWindow::removeid(int id){
+
+
+    for(int i=id+1;i<nextId;i++){
+        QString mytype = tagList.at(i);
+        if(mytype=="regex_find"){
+            regex_find *regex_find1 = (regex_find*)widgetList.at(i);
+            std::cout<<regex_find1->id;
+            regex_find1->id--;
+            regex_find1->saveContent();
+        }else if(mytype=="regex_match"){
+            regex_match *regex_match1 = (regex_match*)widgetList.at(i);
+            regex_match1->id--;
+            regex_match1->saveContent();
+        }else if(mytype=="regex_replacement"){
+            regex_replacement *regex_replacement1 = (regex_replacement*)widgetList.at(i);
+            regex_replacement1->id--;
+            regex_replacement1->saveContent();
+        }else if(mytype=="Regular_file_search"){
+            Regular_file_search *regular_file_search1 = (Regular_file_search*)widgetList.at(i);
+            regular_file_search1->id--;
+            regular_file_search1->saveContent();
+        }else if(mytype=="Regular_file_replacement"){
+            Regular_file_replacement *regular_file_replacement1 = (Regular_file_replacement*)widgetList.at(i);
+            regular_file_replacement1->id--;
+            regular_file_replacement1->saveContent();
+        }
+    }
+    widgetList.removeAt(id);
+    nextId--;
+
+
+    tagList.removeAt(id);
+
+}
+
+
+void MainWindow::printIdList(){
+    for(int i=0;i<nextId;i++){
+        QString mytype = tagList.at(i);
+        if(mytype=="regex_find"){
+            regex_find *regex_find1 = (regex_find*)widgetList.at(i);
+            std::cout<<regex_find1->id;
+
+            regex_find1->saveContent();
+        }else if(mytype=="regex_match"){
+            regex_match *regex_match1 = (regex_match*)widgetList.at(i);
+            std::cout<<regex_match1->id;
+
+        }else if(mytype=="regex_replacement"){
+            regex_replacement *regex_replacement1 = (regex_replacement*)widgetList.at(i);
+            std::cout<<regex_replacement1->id;
+
+        }else if(mytype=="Regular_file_search"){
+            Regular_file_search *regular_file_search1 = (Regular_file_search*)widgetList.at(i);
+            std::cout<<regular_file_search1->id;
+
+        }else if(mytype=="Regular_file_replacement"){
+            Regular_file_replacement *regular_file_replacement1 = (Regular_file_replacement*)widgetList.at(i);
+            std::cout<<regular_file_replacement1->id;
+
+        }
+    }
+}

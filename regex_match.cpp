@@ -29,6 +29,7 @@ regex_match::~regex_match()
     mysetting->setValue("regexMatch/regularExpressionStr",str1);
     QString str2 = ui->textEdit->toPlainText();
     mysetting->setValue("regexMatch/inputStr",str2);
+    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -93,6 +94,9 @@ void regex_match::on_textEdit_textChanged()
 
 void regex_match::on_toolButton_clicked()
 {
+    myMainWindow->removeid(id);
     qmdiArea->closeActiveSubWindow();
 }
+void regex_match::saveContent(){
 
+}

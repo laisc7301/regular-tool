@@ -15,6 +15,10 @@ public:
     explicit regex_replacement(QWidget *parent = nullptr);
     ~regex_replacement();
 
+    int id=0;
+    void saveContent();
+
+
 private slots:
     void on_pushButton_clicked();
 

@@ -15,6 +15,10 @@ public:
     explicit regex_match(QWidget *parent = nullptr);
     ~regex_match();
 
+    int id=0;
+    void saveContent();
+
+
 private slots:
     void on_pushButton_clicked();
 

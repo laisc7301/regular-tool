@@ -15,6 +15,9 @@ public:
     explicit regex_find(QWidget *parent = nullptr);
     ~regex_find();
 
+    int id=0;
+    void saveContent();
+
 private slots:
     void on_pushButton_2_clicked();
 
