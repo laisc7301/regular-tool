@@ -1,6 +1,6 @@
 #ifndef REGEX_REPLACEMENT_H
 #define REGEX_REPLACEMENT_H
-
+#include "load_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,7 +17,16 @@ public:
 
     int id=0;
     void saveContent();
+    QString regularExpression="";
+    bool isRegularExpressionChange=false;
+    QString replace="";
+    bool isReplaceChange=false;
+    QString replaceInput="";
+    bool isReplaceInputChange=false;
+    load_thread load2;
 
+public slots:
+    void myload2();
 
 private slots:
     void on_pushButton_clicked();

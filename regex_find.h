@@ -1,6 +1,6 @@
 #ifndef REGEX_FIND_H
 #define REGEX_FIND_H
-
+#include "load_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -16,7 +16,15 @@ public:
     ~regex_find();
 
     int id=0;
+    QString regularExpressionStr="";
+    bool isRegularExpressionStrChange=false;
+    QString searchStr="";
+    bool isSearchStrChange=false;
     void saveContent();
+    load_thread load2;
+
+public slots:
+    void myload2();
 
 private slots:
     void on_pushButton_2_clicked();

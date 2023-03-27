@@ -1,6 +1,7 @@
 #include "regular_file_search.h"
 #include "ui_regular_file_search.h"
 #include "global.h"
+#include "load_thread.h"
 
 #include <QFileDialog>
 #include <QDebug>
@@ -18,6 +19,9 @@ Regular_file_search::Regular_file_search(QWidget *parent) :
     if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
     QString regularExpressionStr = mysetting->value("regularFileSearch/regularExpressionStr").toString();
     if(regularExpressionStr!="")ui->lineEdit_3->setText(regularExpressionStr);
+
+    QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
+    load2.start();
 }
 
 Regular_file_search::~Regular_file_search()
@@ -165,15 +169,15 @@ QStringList Regular_file_search::getFileListUnderDir(const QString &dirPath,cons
 
 void Regular_file_search::on_lineEdit_3_textChanged(const QString &arg1)
 {
-    regular_file_search_regularExpressionStr = ui->lineEdit_3->text();
-    isRegularFileSearch_RegularExpressionStrChange = true;
+    regularExpressionStr = ui->lineEdit_3->text();
+    isRegularExpressionStrChange = true;
 }
 
 
 void Regular_file_search::on_lineEdit_2_textChanged(const QString &arg1)
 {
-    regular_file_search_fileExtension = ui->lineEdit_2->text();
-    isRegularFileSearch_FileExtensionChange = true;
+    fileExtension = ui->lineEdit_2->text();
+    isFileExtensionChange = true;
 }
 
 
@@ -184,5 +188,23 @@ void Regular_file_search::on_toolButton_clicked()
 }
 
 void Regular_file_search::saveContent(){
+    if (isFileExtensionChange){
+        isFileExtensionChange=false;
+        QString configName = QString::number(id)+"-regularFileSearch/fileExtension";
+        myconfig->setValue(configName,fileExtension);
+    }
+    if (isRegularExpressionStrChange){
+        isRegularExpressionStrChange=false;
+        QString configName = QString::number(id)+"-regularFileReplacement/regularExpression";
+        myconfig->setValue(configName,regularExpressionStr);
+    }
 
+
+}
+void Regular_file_search::myload2(){
+    QString fileExtension = myconfig->value(QString::number(id)+"-regularFileSearch/fileExtension").toString();
+    if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
+
+    QString regularExpression = myconfig->value(QString::number(id)+"-regularFileReplacement/regularExpression").toString();
+    if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
 }

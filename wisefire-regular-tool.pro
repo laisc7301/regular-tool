@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     about.cpp \
+    load_thread.cpp \
     main.cpp \
     mainwindow.cpp \
     mainwindow_thread.cpp \
@@ -19,11 +20,13 @@ SOURCES += \
     regex_replacement.cpp \
     regular_file_replacement.cpp \
     regular_file_search.cpp \
-    replacement_thread.cpp
+    replacement_thread.cpp \
+    save_thread.cpp
 
 HEADERS += \
     about.h \
     global.h \
+    load_thread.h \
     mainwindow.h \
     mainwindow_thread.h \
     regex_find.h \
@@ -31,7 +34,8 @@ HEADERS += \
     regex_replacement.h \
     regular_file_replacement.h \
     regular_file_search.h \
-    replacement_thread.h
+    replacement_thread.h \
+    save_thread.h
 
 FORMS += \
     about.ui \

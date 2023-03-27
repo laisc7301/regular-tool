@@ -15,15 +15,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    int nextId=0;
+
     void removeid(int id);
     void printIdList();
+    void saveTag();
 private:
     Ui::MainWindow *ui;
 
 
     void showTag();
-    void saveTag();
+
 
 };
 #endif // MAINWINDOW_H

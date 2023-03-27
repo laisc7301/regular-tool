@@ -1,10 +1,13 @@
 #include "regex_match.h"
 #include "ui_regex_match.h"
 #include "global.h"
+#include "load_thread.h"
+
 
 #include <QRegularExpression>
 #include <qDebug>
 #include <QSettings>
+#include <QThread>
 
 #include <iostream>
 
@@ -15,11 +18,14 @@ regex_match::regex_match(QWidget *parent) :
     ui->setupUi(this);
 
 
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString str1 = mysetting->value("regexMatch/regularExpressionStr").toString();
-    if(str1!="")ui->lineEdit->setText(str1);
-    QString str2 = mysetting->value("regexMatch/inputStr").toString();
-    if(str2!="")ui->textEdit->setText(str2);
+//    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
+//    QString str1 = mysetting->value("regexMatch/regularExpressionStr").toString();
+//    if(str1!="")ui->lineEdit->setText(str1);
+//    QString str2 = mysetting->value("regexMatch/inputStr").toString();
+//    if(str2!="")ui->textEdit->setText(str2);
+    QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
+
+    load2.start();
 }
 
 regex_match::~regex_match()
@@ -29,7 +35,7 @@ regex_match::~regex_match()
     mysetting->setValue("regexMatch/regularExpressionStr",str1);
     QString str2 = ui->textEdit->toPlainText();
     mysetting->setValue("regexMatch/inputStr",str2);
-    myconfig->setValue("mainwindow/tagList",tagList.join(","));
+    //myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -80,15 +86,15 @@ void regex_match::on_pushButton_clicked()
 
 void regex_match::on_lineEdit_textChanged(const QString &arg1)
 {
-    regex_match_regularExpressionStr = ui->lineEdit->text();
-    isRegexMatch_RegularExpressionStrChange = true;
+    regularExpressionStr = ui->lineEdit->text();
+    isRegularExpressionStrChange = true;
 }
 
 
 void regex_match::on_textEdit_textChanged()
 {
-    regex_match_inputStr = ui->textEdit->toPlainText();
-    isRegexMatch_InputStrChange = true;
+    inputStr = ui->textEdit->toPlainText();
+    isInputStrChange = true;
 }
 
 
@@ -98,5 +104,29 @@ void regex_match::on_toolButton_clicked()
     qmdiArea->closeActiveSubWindow();
 }
 void regex_match::saveContent(){
+    if (isRegularExpressionStrChange){
+        isRegularExpressionStrChange=false;
+        QString configName = QString::number(id)+"-regexMatch/regularExpressionStr";
+        myconfig->setValue(configName,regularExpressionStr);
+    }
+    if (isInputStrChange){
+        isInputStrChange=false;
+        QString configName = QString::number(id)+"-regexMatch/inputStr";
+        myconfig->setValue(configName,inputStr);
+    }
+    //qDebug()<<QString::number(id);
+}
 
+
+
+void regex_match::myload2()
+{
+    QString str1 = myconfig->value(QString::number(id)+"--regexMatch/regularExpressionStr").toString();
+    qDebug()<<QString::number(id);
+    //qDebug()<<QString::number(getId());
+    if(str1!="")ui->lineEdit->setText(str1);
+    regularExpressionStr = str1;
+    QString str2 = myconfig->value(QString::number(id)+"-regexMatch/inputStr").toString();
+    if(str2!="")ui->textEdit->setText(str2);
+    inputStr = str2;
 }

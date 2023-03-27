@@ -1,6 +1,7 @@
 #ifndef REGULAR_FILE_SEARCH_H
 #define REGULAR_FILE_SEARCH_H
 
+#include "load_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -16,8 +17,14 @@ public:
     ~Regular_file_search();
 
     int id=0;
-    void saveContent();
 
+    QString regularExpressionStr="";
+    bool isRegularExpressionStrChange=false;
+    QString fileExtension="";
+    bool isFileExtensionChange=false;
+
+    void saveContent();
+    load_thread load2;
 
 private slots:
     void on_pushButton_clicked();
@@ -32,6 +39,7 @@ private slots:
 
     void on_toolButton_clicked();
 
+    void myload2();
 private:
     Ui::Regular_file_search *ui;
 };

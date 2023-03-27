@@ -1,6 +1,7 @@
 #ifndef REGEX_MATCH_H
 #define REGEX_MATCH_H
 
+#include "load_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,7 +18,14 @@ public:
 
     int id=0;
     void saveContent();
+    QString regularExpressionStr="";
+    bool isRegularExpressionStrChange=false;
+    QString inputStr="";
+    bool isInputStrChange=false;
+    load_thread load2;
 
+public slots:
+    void myload2();
 
 private slots:
     void on_pushButton_clicked();

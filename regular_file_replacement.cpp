@@ -17,15 +17,8 @@ Regular_file_replacement::Regular_file_replacement(QWidget *parent) :
     QObject::connect(&thread, SIGNAL(sendmsg(QString)), this, SLOT(getmsg(QString)));
     QObject::connect(&thread, SIGNAL(setProgressBar(int)), this, SLOT(setProgressBar(int)));
     QObject::connect(&thread, SIGNAL(finish()), this, SLOT(threadFinish()));
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString fileExtension = mysetting->value("regularFileReplacement/fileExtension").toString();
-    if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
-
-    QString regularExpression = mysetting->value("regularFileReplacement/regularExpression").toString();
-    if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
-
-    QString replace = mysetting->value("regularFileReplacement/replace").toString();
-    if(replace!="")ui->lineEdit_4->setText(replace);
+    QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
+    load2.start();
 }
 
 Regular_file_replacement::~Regular_file_replacement()
@@ -38,7 +31,6 @@ Regular_file_replacement::~Regular_file_replacement()
     QString replace = ui->lineEdit_4->text();
     mysetting->setValue("regularFileReplacement/replace",replace);
 
-    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -99,22 +91,22 @@ void Regular_file_replacement::on_pushButton_2_clicked()
 
 void Regular_file_replacement::on_lineEdit_2_textChanged(const QString &arg1)
 {
-    regular_file_replacement_fileExtension = ui->lineEdit_2->text();
-    isRegularFileReplacement_FileExtensionChange = true;
+    fileExtension = ui->lineEdit_2->text();
+    isFileExtensionChange = true;
 }
 
 
 void Regular_file_replacement::on_lineEdit_3_textChanged(const QString &arg1)
 {
-    regular_file_replacement_regularExpressionStr = ui->lineEdit_3->text();
-    isRegularFileReplacement_RegularExpressionStrChange = true;
+    regularExpressionStr = ui->lineEdit_3->text();
+    isRegularExpressionStrChange = true;
 }
 
 
 void Regular_file_replacement::on_lineEdit_4_textChanged(const QString &arg1)
 {
-    regular_file_replacement_replace = ui->lineEdit_4->text();
-    isRegularFileReplacement_ReplaceChange = true;
+    replace = ui->lineEdit_4->text();
+    isReplaceChange = true;
 }
 
 
@@ -123,6 +115,34 @@ void Regular_file_replacement::on_toolButton_clicked()
     myMainWindow->removeid(id);
     qmdiArea->closeActiveSubWindow();
 }
-void Regular_file_replacement::saveContent(){
 
+void Regular_file_replacement::saveContent(){
+    if (isFileExtensionChange){
+        isFileExtensionChange=false;
+        QString configName = QString::number(id)+"-regularFileReplacement/fileExtension";
+        myconfig->setValue(configName,fileExtension);
+    }
+    if (isRegularExpressionStrChange){
+        isRegularExpressionStrChange=false;
+        QString configName = QString::number(id)+"-regularFileReplacement/regularExpression";
+        myconfig->setValue(configName,regularExpressionStr);
+    }
+    if (isReplaceChange){
+        isReplaceChange=false;
+        QString configName = QString::number(id)+"-regularExpression/replace";
+        myconfig->setValue(configName,replace);
+    }
+
+}
+
+void Regular_file_replacement::myload2(){
+
+    QString fileExtension = myconfig->value(QString::number(id)+"-regularFileReplacement/fileExtension").toString();
+    if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
+
+    QString regularExpression = myconfig->value(QString::number(id)+"-regularFileReplacement/regularExpression").toString();
+    if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
+
+    QString replace = myconfig->value(QString::number(id)+"-regularExpression/replace").toString();
+    if(replace!="")ui->lineEdit_4->setText(replace);
 }

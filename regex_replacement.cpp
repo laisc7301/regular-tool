@@ -16,6 +16,9 @@
 #include <QClipboard>
 #include <QTimer>
 
+#include "load_thread.h"
+
+
 //QTimer *timer = new QTimer();
 
 regex_replacement::regex_replacement(QWidget *parent) :
@@ -23,17 +26,8 @@ regex_replacement::regex_replacement(QWidget *parent) :
     ui(new Ui::regex_replacement)
 {
     ui->setupUi(this);
-
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString str1 = mysetting->value("regularExpression/regularExpression").toString();
-    if(str1!="")ui->lineEdit->setText(str1);
-    QString str2 = mysetting->value("regularExpression/replace").toString();
-    if(str2!="")ui->lineEdit_2->setText(str2);
-    QString str3 = mysetting->value("regularExpression/replaceInput").toString();
-    if(str3!=""){
-        //std::cout << "not null" << std::endl;
-        ui->textEdit->setText(str3);
-    }
+    QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
+    load2.start();
 
 //    connect(timer,&QTimer::timeout,this,[=](){
 
@@ -94,22 +88,22 @@ void regex_replacement::on_pushButton_2_clicked()
 
 void regex_replacement::on_lineEdit_textChanged(const QString &arg1)
 {
-    regex_replacement_regularExpression = ui->lineEdit->text();
-    isRegexReplacement_RegularExpressionChange = true;
+    regularExpression = ui->lineEdit->text();
+    isRegularExpressionChange = true;
 }
 
 
 void regex_replacement::on_lineEdit_2_textChanged(const QString &arg1)
 {
-    regex_replacement_replace = ui->lineEdit_2->text();
-    isRegexReplacement_ReplaceChange = true;
+    replace = ui->lineEdit_2->text();
+    isReplaceChange = true;
 }
 
 
 void regex_replacement::on_textEdit_textChanged()
 {
-    regex_replacement_replaceInput = ui->textEdit->toPlainText();
-    isRegexReplacement_ReplaceInputChange = true;
+    replaceInput = ui->textEdit->toPlainText();
+    isReplaceInputChange = true;
 }
 
 
@@ -119,6 +113,42 @@ void regex_replacement::on_toolButton_clicked()
     qmdiArea->closeActiveSubWindow();
 }
 void regex_replacement::saveContent(){
-
+    if (isRegularExpressionChange){
+        isRegularExpressionChange=false;
+        QString configName = QString::number(id)+"-regularExpression/regularExpression";
+        myconfig->setValue(configName,regularExpression);
+    }
+    if (isReplaceChange){
+        isReplaceChange=false;
+        QString configName = QString::number(id)+"-regularExpression/replace";
+        myconfig->setValue(configName,replace);
+    }
+    if (isReplaceInputChange){
+        isReplaceInputChange=false;
+        QString configName = QString::number(id)+"-regularExpression/replaceInput";
+        myconfig->setValue(configName,replaceInput);
+    }
 }
 
+void regex_replacement::myload2()
+{
+//    QString str1 = myconfig->value(QString::number(id)+"--regexMatch/regularExpressionStr").toString();
+//    qDebug()<<QString::number(id);
+//    //qDebug()<<QString::number(getId());
+//    if(str1!="")ui->lineEdit->setText(str1);
+//    regularExpressionStr = str1;
+//    QString str2 = myconfig->value(QString::number(id)+"-regexMatch/inputStr").toString();
+//    if(str2!="")ui->textEdit->setText(str2);
+//    inputStr = str2;
+
+
+    QString str1 = myconfig->value(QString::number(id)+"-regularExpression/regularExpression").toString();
+    if(str1!="")ui->lineEdit->setText(str1);
+    QString str2 = myconfig->value(QString::number(id)+"-regularExpression/replace").toString();
+    if(str2!="")ui->lineEdit_2->setText(str2);
+    QString str3 = myconfig->value(QString::number(id)+"-regularExpression/replaceInput").toString();
+    if(str3!=""){
+        //std::cout << "not null" << std::endl;
+        ui->textEdit->setText(str3);
+    }
+}

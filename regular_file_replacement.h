@@ -2,6 +2,7 @@
 #define REGULAR_FILE_REPLACEMENT_H
 
 #include "replacement_thread.h"
+#include "load_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -19,6 +20,14 @@ public:
     int id=0;
     void saveContent();
 
+    QString fileExtension="";
+    bool isFileExtensionChange=false;
+    QString regularExpressionStr="";
+    bool isRegularExpressionStrChange=false;
+    QString replace="";
+    bool isReplaceChange=false;
+
+    load_thread load2;
 
 public slots:
     void getmsg(QString msg);
@@ -27,6 +36,7 @@ public slots:
 
     void threadFinish();
 
+    void myload2();
 private slots:
 
     void on_pushButton_clicked();

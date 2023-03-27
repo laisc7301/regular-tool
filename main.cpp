@@ -10,6 +10,9 @@ QMdiArea *qmdiArea = NULL;
 QSettings *myconfig = new QSettings("config.ini", QSettings::IniFormat);
 QStringList tagList;
 QList<QWidget*> widgetList;
+int nextId=0;
+//QList<QThread*> threadList;
+//int nextThreadId=0;
 
 QString regex_replacement_regularExpression = "";
 QString regex_replacement_replace = "";

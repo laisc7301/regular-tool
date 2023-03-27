@@ -4,6 +4,7 @@
 #include <QSettings>
 #include <QList>
 #include <QWidget>
+#include <QThread>
 #include "mainwindow.h"
 
 extern QString version;
@@ -12,6 +13,10 @@ extern QMdiArea *qmdiArea;
 extern QSettings *myconfig;
 extern QStringList tagList;
 extern QList<QWidget*> widgetList;
+extern int nextId;
+//extern QList<QThread*> threadList;
+//extern int nextThreadId;
+
 
 extern QString regex_replacement_regularExpression;
 extern QString regex_replacement_replace;
