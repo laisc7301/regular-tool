@@ -142,7 +142,15 @@ void regex_find::saveContent(){
     }
 }
 
+void regex_find::alwaysSaveContent(){
 
+        QString configName = QString::number(id)+"-regexFind/RegularExpressionStr";
+        myconfig->setValue(configName,regularExpressionStr);
+
+        QString configName2 = QString::number(id)+"-regexFind/SearchStr";
+        myconfig->setValue(configName2,searchStr);
+
+}
 
 
 void regex_find::myload2()

@@ -122,12 +122,25 @@ void Regular_file_replacement::saveContent(){
     }
     if (isReplaceChange){
         isReplaceChange=false;
-        QString configName = QString::number(id)+"-regularExpression/replace";
+        QString configName = QString::number(id)+"-regularFileReplacement/replace";
         myconfig->setValue(configName,replace);
     }
 
 }
 
+void Regular_file_replacement::alwaysSaveContent(){
+
+        QString configName = QString::number(id)+"-regularFileReplacement/fileExtension";
+        myconfig->setValue(configName,fileExtension);
+
+        QString configName2 = QString::number(id)+"-regularFileReplacement/regularExpression";
+        myconfig->setValue(configName2,regularExpressionStr);
+
+        QString configName3 = QString::number(id)+"-regularFileReplacement/replace";
+        myconfig->setValue(configName3,replace);
+
+
+}
 void Regular_file_replacement::myload2(){
 
     QString fileExtension = myconfig->value(QString::number(id)+"-regularFileReplacement/fileExtension").toString();
@@ -136,6 +149,6 @@ void Regular_file_replacement::myload2(){
     QString regularExpression = myconfig->value(QString::number(id)+"-regularFileReplacement/regularExpression").toString();
     if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
 
-    QString replace = myconfig->value(QString::number(id)+"-regularExpression/replace").toString();
+    QString replace = myconfig->value(QString::number(id)+"-regularFileReplacement/replace").toString();
     if(replace!="")ui->lineEdit_4->setText(replace);
 }

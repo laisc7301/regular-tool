@@ -24,6 +24,7 @@ public:
     QString replaceInput="";
     bool isReplaceInputChange=false;
     load_thread load2;
+    void alwaysSaveContent();
 
 public slots:
     void myload2();

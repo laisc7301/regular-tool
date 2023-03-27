@@ -112,7 +112,16 @@ void regex_match::saveContent(){
     //qDebug()<<QString::number(id);
 }
 
+void regex_match::alwaysSaveContent(){
 
+        QString configName = QString::number(id)+"-regexMatch/regularExpressionStr";
+        myconfig->setValue(configName,regularExpressionStr);
+
+        QString configName2 = QString::number(id)+"-regexMatch/inputStr";
+        myconfig->setValue(configName2,inputStr);
+
+    //qDebug()<<QString::number(id);
+}
 
 void regex_match::myload2()
 {

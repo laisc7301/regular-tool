@@ -24,6 +24,7 @@ public:
     bool isFileExtensionChange=false;
 
     void saveContent();
+    void alwaysSaveContent();
     load_thread load2;
 
 private slots:

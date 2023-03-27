@@ -34,16 +34,7 @@ regex_replacement::regex_replacement(QWidget *parent) :
 
 regex_replacement::~regex_replacement()
 {
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString str1 = ui->lineEdit->text();
-    mysetting->setValue("regularReplace/regularExpression",str1);
-    QString str2 = ui->lineEdit_2->text();
-    mysetting->setValue("regularReplace/replace",str2);
-    QString str3 = ui->textEdit->toPlainText();
-    mysetting->setValue("regularReplace/replaceInput",str3);
 
-
-    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -110,6 +101,19 @@ void regex_replacement::saveContent(){
     }
 }
 
+
+void regex_replacement::alwaysSaveContent(){
+
+        QString configName = QString::number(id)+"-regularReplace/regularExpression";
+        myconfig->setValue(configName,regularExpression);
+
+        QString configName2 = QString::number(id)+"-regularReplace/replace";
+        myconfig->setValue(configName2,replace);
+
+        QString configName3 = QString::number(id)+"-regularReplace/replaceInput";
+        myconfig->setValue(configName3,replaceInput);
+
+}
 void regex_replacement::myload2()
 {
 

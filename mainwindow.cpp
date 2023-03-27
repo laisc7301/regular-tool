@@ -218,36 +218,49 @@ void MainWindow::saveTag(){
 }
 
 void MainWindow::removeid(int id){
+    qDebug()<<QString::number(id);
+    QString mytype0 = tagList.at(id);
+    if(mytype0=="regex_find"){
+        myconfig->remove(QString::number(id)+"-regexFind");
+    }else if(mytype0=="regex_match"){
+        myconfig->remove(QString::number(id)+"-regexMatch");
+    }else if(mytype0=="regex_replacement"){
+        myconfig->remove(QString::number(id)+"-regularReplace");
+    }else if(mytype0=="Regular_file_search"){
+        myconfig->remove(QString::number(id)+"-regularFileSearch");
+    }else if(mytype0=="Regular_file_replacement"){
+        myconfig->remove(QString::number(id)+"-regularFileReplacement");
+    }
 
 
     for(int i=id+1;i<nextId;i++){
         QString mytype = tagList.at(i);
         if(mytype=="regex_find"){
+            myconfig->remove(QString::number(i)+"-regexFind");
             regex_find *regex_find1 = (regex_find*)widgetList.at(i);
             std::cout<<regex_find1->id;
             regex_find1->id--;
-            regex_find1->saveContent();
-            myconfig->remove(QString::number(i)+"-regexFind");
+            regex_find1->alwaysSaveContent();
         }else if(mytype=="regex_match"){
+            myconfig->remove(QString::number(i)+"-regexMatch");
             regex_match *regex_match1 = (regex_match*)widgetList.at(i);
             regex_match1->id--;
-            regex_match1->saveContent();
-            myconfig->remove(QString::number(i)+"-regexMatch");
+            regex_match1->alwaysSaveContent();
         }else if(mytype=="regex_replacement"){
+            myconfig->remove(QString::number(i)+"-regularReplace");
             regex_replacement *regex_replacement1 = (regex_replacement*)widgetList.at(i);
             regex_replacement1->id--;
-            regex_replacement1->saveContent();
-            myconfig->remove(QString::number(i)+"-regularReplace");
+            regex_replacement1->alwaysSaveContent();
         }else if(mytype=="Regular_file_search"){
+            myconfig->remove(QString::number(i)+"-regularFileSearch");
             Regular_file_search *regular_file_search1 = (Regular_file_search*)widgetList.at(i);
             regular_file_search1->id--;
-            regular_file_search1->saveContent();
-            myconfig->remove(QString::number(i)+"-regularFileSearch");
+            regular_file_search1->alwaysSaveContent();
         }else if(mytype=="Regular_file_replacement"){
+            myconfig->remove(QString::number(i)+"-regularFileReplacement");
             Regular_file_replacement *regular_file_replacement1 = (Regular_file_replacement*)widgetList.at(i);
             regular_file_replacement1->id--;
-            regular_file_replacement1->saveContent();
-            myconfig->remove(QString::number(i)+"-regularFileReplacement");
+            regular_file_replacement1->alwaysSaveContent();
         }
     }
     widgetList.removeAt(id);

@@ -21,6 +21,7 @@ public:
     QString searchStr="";
     bool isSearchStrChange=false;
     void saveContent();
+    void alwaysSaveContent();
     load_thread load2;
 
 public slots:

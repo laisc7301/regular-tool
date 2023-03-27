@@ -26,6 +26,7 @@ public:
     bool isRegularExpressionStrChange=false;
     QString replace="";
     bool isReplaceChange=false;
+    void alwaysSaveContent();
 
     load_thread load2;
 

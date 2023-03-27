@@ -23,6 +23,7 @@ public:
     QString inputStr="";
     bool isInputStrChange=false;
     load_thread load2;
+    void alwaysSaveContent();
 
 public slots:
     void myload2();

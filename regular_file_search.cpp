@@ -191,6 +191,17 @@ void Regular_file_search::saveContent(){
 
 
 }
+
+void Regular_file_search::alwaysSaveContent(){
+
+        QString configName = QString::number(id)+"-regularFileSearch/fileExtension";
+        myconfig->setValue(configName,fileExtension);
+
+        QString configName2 = QString::number(id)+"-regularFileSearch/regularExpression";
+        myconfig->setValue(configName2,regularExpressionStr);
+
+
+}
 void Regular_file_search::myload2(){
     QString fileExtension = myconfig->value(QString::number(id)+"-regularFileSearch/fileExtension").toString();
     if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
