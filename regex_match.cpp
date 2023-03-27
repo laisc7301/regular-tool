@@ -30,12 +30,7 @@ regex_match::regex_match(QWidget *parent) :
 
 regex_match::~regex_match()
 {
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString str1 = ui->lineEdit->text();
-    mysetting->setValue("regexMatch/regularExpressionStr",str1);
-    QString str2 = ui->textEdit->toPlainText();
-    mysetting->setValue("regexMatch/inputStr",str2);
-    //myconfig->setValue("mainwindow/tagList",tagList.join(","));
+
     delete ui;
 }
 
@@ -121,9 +116,8 @@ void regex_match::saveContent(){
 
 void regex_match::myload2()
 {
-    QString str1 = myconfig->value(QString::number(id)+"--regexMatch/regularExpressionStr").toString();
-    qDebug()<<QString::number(id);
-    //qDebug()<<QString::number(getId());
+    QString str1 = myconfig->value(QString::number(id)+"-regexMatch/regularExpressionStr").toString();
+
     if(str1!="")ui->lineEdit->setText(str1);
     regularExpressionStr = str1;
     QString str2 = myconfig->value(QString::number(id)+"-regexMatch/inputStr").toString();

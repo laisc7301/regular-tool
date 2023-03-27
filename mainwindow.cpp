@@ -24,7 +24,6 @@
 
 QTimer *timer2 = new QTimer();
 QTimer *timer3 = new QTimer();
-//QSettings *myconfig = new QSettings("config.ini", QSettings::IniFormat);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,10 +34,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->mdiArea->setViewMode(QMdiArea::TabbedView);
 
-
+    QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
+    load2.start();
     QToolBar *toolBar = new QToolBar();
     addToolBar(toolBar);
-    showTag();
+
     QAction *m1 = toolBar->addAction("正则查找");
     connect(m1,&QAction::triggered,this,[=](){
         //std::cout << "new action" << std::endl;
@@ -123,95 +123,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    //    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    //    regex_replacement_regularExpression = mysetting->value("regularExpression/regularExpression").toString();
 
-    //    regex_replacement_replace = mysetting->value("regularExpression/replace").toString();
-
-    //    regex_replacement_replaceInput = mysetting->value("regularExpression/replaceInput").toString();
-
-    //    regex_match_regularExpressionStr = mysetting->value("regexMatch/regularExpressionStr").toString();
-
-    //    regex_match_inputStr = mysetting->value("regexMatch/inputStr").toString();
-
-    //    regex_find_regularExpressionStr = mysetting->value("regexFind/RegularExpressionStr").toString();
-
-    //    regex_find_SearchStr = mysetting->value("regexFind/SearchStr").toString();
-
-    //    regular_file_search_regularExpressionStr = mysetting->value("regularFileSearch/regularExpressionStr").toString();
-
-    //    regular_file_search_fileExtension = mysetting->value("regularFileSearch/fileExtension").toString();
-
-    //    connect(timer2,&QTimer::timeout,this,[=](){
-
-    //        //std::cout << "time" << std::endl;
-
-    //        if(isRegexReplacement_RegularExpressionChange){
-    //            isRegexReplacement_RegularExpressionChange = false;
-    //            //QString str1 = ui->lineEdit->text();
-    //            mysetting->setValue("regularExpression/regularExpression",regex_replacement_regularExpression);
-    //        }
-    //        if(isRegexReplacement_ReplaceChange){
-    //            isRegexReplacement_ReplaceChange = false;
-    //            //QString str1 = ui->lineEdit_2->text();
-    //            mysetting->setValue("regularExpression/replace",regex_replacement_replace);
-    //        }
-    //        if(isRegexReplacement_ReplaceInputChange){
-    //            isRegexReplacement_ReplaceInputChange = false;
-    //            //QString str1 = ui->textEdit->toPlainText();
-    //            mysetting->setValue("regularExpression/replaceInput",regex_replacement_replaceInput);
-    //        }
-    //        if(isRegexMatch_RegularExpressionStrChange){
-    //            isRegexMatch_RegularExpressionStrChange = false;
-
-    //            mysetting->setValue("regexMatch/regularExpressionStr",regex_match_regularExpressionStr);
-    //        }
-    //        if(isRegexMatch_InputStrChange){
-    //            isRegexMatch_InputStrChange = false;
-
-    //            mysetting->setValue("regexMatch/inputStr",regex_match_inputStr);
-    //        }
-    //        if(isRegexFind_RegularExpressionStrChange){
-    //            isRegexFind_RegularExpressionStrChange = false;
-
-    //            mysetting->setValue("regexFind/RegularExpressionStr",regex_find_regularExpressionStr);
-    //        }
-    //        if(isRegexFind_SearchStrChange){
-    //            isRegexFind_SearchStrChange = false;
-
-    //            mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
-    //        }
-
-    //        if(isRegularFileSearch_FileExtensionChange){
-    //            isRegularFileSearch_FileExtensionChange = false;
-
-    //            mysetting->setValue("regularFileSearch/fileExtension",regular_file_search_fileExtension);
-    //        }
-
-    //        if(isRegularFileSearch_RegularExpressionStrChange){
-    //            isRegularFileSearch_RegularExpressionStrChange = false;
-
-    //            mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
-    //        }
-
-    //        if(isRegularFileReplacement_FileExtensionChange){
-    //            isRegularFileReplacement_FileExtensionChange = false;
-
-    //            mysetting->setValue("regularFileReplacement/fileExtension",regular_file_replacement_fileExtension);
-    //        }
-    //        if(isRegularFileReplacement_RegularExpressionStrChange){
-    //            isRegularFileReplacement_RegularExpressionStrChange = false;
-
-    //            mysetting->setValue("regularFileReplacement/regularExpression",regular_file_replacement_regularExpressionStr);
-    //        }
-    //        if(isRegularFileReplacement_ReplaceChange){
-    //            isRegularFileReplacement_ReplaceChange = false;
-
-    //            mysetting->setValue("regularFileReplacement/replace",regular_file_replacement_replace);
-    //        }
-
-    //    });
-    //    timer2->start(1000);
     connect(timer3,&QTimer::timeout,this,[=](){
         //qDebug()<<"runhere";
         for(int i=0;i<nextId;i++){
@@ -239,28 +151,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    //saveTag();
-    //myconfig->setValue("mainwindow/tagList",tagList.join(","));
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    mysetting->setValue("regularExpression/regularExpression",regex_replacement_regularExpression);
-    mysetting->setValue("regularExpression/replace",regex_replacement_replace);
-    mysetting->setValue("regularExpression/replaceInput",regex_replacement_replaceInput);
-
-
-    mysetting->setValue("regexMatch/regularExpressionStr",regex_match_regularExpressionStr);
-    mysetting->setValue("regexMatch/inputStr",regex_match_inputStr);
-
-    mysetting->setValue("regexFind/RegularExpressionStr",regex_find_regularExpressionStr);
-    mysetting->setValue("regexFind/SearchStr",regex_find_SearchStr);
-
-    mysetting->setValue("regularFileSearch/regularExpressionStr",regular_file_search_regularExpressionStr);
-    mysetting->setValue("regularFileSearch/fileExtension",regular_file_search_fileExtension);
-
-    mysetting->setValue("regularFileReplacement/fileExtension",regular_file_replacement_fileExtension);
-    mysetting->setValue("regularFileReplacement/regularExpression",regular_file_replacement_regularExpressionStr);
-    mysetting->setValue("regularFileReplacement/replace",regular_file_replacement_replace);
-
-
     delete ui;
 }
 
@@ -337,22 +227,27 @@ void MainWindow::removeid(int id){
             std::cout<<regex_find1->id;
             regex_find1->id--;
             regex_find1->saveContent();
+            myconfig->remove(QString::number(i)+"-regexFind");
         }else if(mytype=="regex_match"){
             regex_match *regex_match1 = (regex_match*)widgetList.at(i);
             regex_match1->id--;
             regex_match1->saveContent();
+            myconfig->remove(QString::number(i)+"-regexMatch");
         }else if(mytype=="regex_replacement"){
             regex_replacement *regex_replacement1 = (regex_replacement*)widgetList.at(i);
             regex_replacement1->id--;
             regex_replacement1->saveContent();
+            myconfig->remove(QString::number(i)+"-regularReplace");
         }else if(mytype=="Regular_file_search"){
             Regular_file_search *regular_file_search1 = (Regular_file_search*)widgetList.at(i);
             regular_file_search1->id--;
             regular_file_search1->saveContent();
+            myconfig->remove(QString::number(i)+"-regularFileSearch");
         }else if(mytype=="Regular_file_replacement"){
             Regular_file_replacement *regular_file_replacement1 = (Regular_file_replacement*)widgetList.at(i);
             regular_file_replacement1->id--;
             regular_file_replacement1->saveContent();
+            myconfig->remove(QString::number(i)+"-regularFileReplacement");
         }
     }
     widgetList.removeAt(id);
@@ -390,4 +285,10 @@ void MainWindow::printIdList(){
 
         }
     }
+}
+
+
+void MainWindow::myload2()
+{
+    showTag();
 }

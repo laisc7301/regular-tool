@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <list>
+#include "load_thread.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,6 +21,12 @@ public:
     void removeid(int id);
     void printIdList();
     void saveTag();
+    load_thread load2;
+
+public slots:
+    void myload2();
+
+
 private:
     Ui::MainWindow *ui;
 

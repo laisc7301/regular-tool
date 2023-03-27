@@ -29,38 +29,18 @@ regex_replacement::regex_replacement(QWidget *parent) :
     QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
     load2.start();
 
-//    connect(timer,&QTimer::timeout,this,[=](){
 
-//        //std::cout << "time" << std::endl;
-
-//        if(isRegexReplacement_RegularExpressionChange){
-//            isRegexReplacement_RegularExpressionChange = false;
-//            QString str1 = ui->lineEdit->text();
-//            mysetting->setValue("regularExpression/regularExpression",str1);
-//        }
-//        if(isRegexReplacement_ReplaceChange){
-//            isRegexReplacement_ReplaceChange = false;
-//            QString str1 = ui->lineEdit_2->text();
-//            mysetting->setValue("regularExpression/replace",str1);
-//        }
-//        if(isRegexReplacement_ReplaceInputChange){
-//            isRegexReplacement_ReplaceInputChange = false;
-//            QString str1 = ui->textEdit->toPlainText();
-//            mysetting->setValue("regularExpression/replaceInput",str1);
-//        }
-//    });
-//    timer->start(1000);
 }
 
 regex_replacement::~regex_replacement()
 {
     QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
     QString str1 = ui->lineEdit->text();
-    mysetting->setValue("regularExpression/regularExpression",str1);
+    mysetting->setValue("regularReplace/regularExpression",str1);
     QString str2 = ui->lineEdit_2->text();
-    mysetting->setValue("regularExpression/replace",str2);
+    mysetting->setValue("regularReplace/replace",str2);
     QString str3 = ui->textEdit->toPlainText();
-    mysetting->setValue("regularExpression/replaceInput",str3);
+    mysetting->setValue("regularReplace/replaceInput",str3);
 
 
     myconfig->setValue("mainwindow/tagList",tagList.join(","));
@@ -115,38 +95,29 @@ void regex_replacement::on_toolButton_clicked()
 void regex_replacement::saveContent(){
     if (isRegularExpressionChange){
         isRegularExpressionChange=false;
-        QString configName = QString::number(id)+"-regularExpression/regularExpression";
+        QString configName = QString::number(id)+"-regularReplace/regularExpression";
         myconfig->setValue(configName,regularExpression);
     }
     if (isReplaceChange){
         isReplaceChange=false;
-        QString configName = QString::number(id)+"-regularExpression/replace";
+        QString configName = QString::number(id)+"-regularReplace/replace";
         myconfig->setValue(configName,replace);
     }
     if (isReplaceInputChange){
         isReplaceInputChange=false;
-        QString configName = QString::number(id)+"-regularExpression/replaceInput";
+        QString configName = QString::number(id)+"-regularReplace/replaceInput";
         myconfig->setValue(configName,replaceInput);
     }
 }
 
 void regex_replacement::myload2()
 {
-//    QString str1 = myconfig->value(QString::number(id)+"--regexMatch/regularExpressionStr").toString();
-//    qDebug()<<QString::number(id);
-//    //qDebug()<<QString::number(getId());
-//    if(str1!="")ui->lineEdit->setText(str1);
-//    regularExpressionStr = str1;
-//    QString str2 = myconfig->value(QString::number(id)+"-regexMatch/inputStr").toString();
-//    if(str2!="")ui->textEdit->setText(str2);
-//    inputStr = str2;
 
-
-    QString str1 = myconfig->value(QString::number(id)+"-regularExpression/regularExpression").toString();
+    QString str1 = myconfig->value(QString::number(id)+"-regularReplace/regularExpression").toString();
     if(str1!="")ui->lineEdit->setText(str1);
-    QString str2 = myconfig->value(QString::number(id)+"-regularExpression/replace").toString();
+    QString str2 = myconfig->value(QString::number(id)+"-regularReplace/replace").toString();
     if(str2!="")ui->lineEdit_2->setText(str2);
-    QString str3 = myconfig->value(QString::number(id)+"-regularExpression/replaceInput").toString();
+    QString str3 = myconfig->value(QString::number(id)+"-regularReplace/replaceInput").toString();
     if(str3!=""){
         //std::cout << "not null" << std::endl;
         ui->textEdit->setText(str3);

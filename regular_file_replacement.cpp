@@ -23,13 +23,6 @@ Regular_file_replacement::Regular_file_replacement(QWidget *parent) :
 
 Regular_file_replacement::~Regular_file_replacement()
 {
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString fileExtension = ui->lineEdit_2->text();
-    mysetting->setValue("regularFileReplacement/fileExtension",fileExtension);
-    QString regularExpression = ui->lineEdit_3->text();
-    mysetting->setValue("regularFileReplacement/regularExpression",regularExpression);
-    QString replace = ui->lineEdit_4->text();
-    mysetting->setValue("regularFileReplacement/replace",replace);
 
     delete ui;
 }

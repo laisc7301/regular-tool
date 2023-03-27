@@ -14,11 +14,7 @@ Regular_file_search::Regular_file_search(QWidget *parent) :
     ui(new Ui::Regular_file_search)
 {
     ui->setupUi(this);
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString fileExtension = mysetting->value("regularFileSearch/fileExtension").toString();
-    if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
-    QString regularExpressionStr = mysetting->value("regularFileSearch/regularExpressionStr").toString();
-    if(regularExpressionStr!="")ui->lineEdit_3->setText(regularExpressionStr);
+
 
     QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
     load2.start();
@@ -27,13 +23,7 @@ Regular_file_search::Regular_file_search(QWidget *parent) :
 Regular_file_search::~Regular_file_search()
 {
 
-    QSettings *mysetting = new QSettings("setting.ini", QSettings::IniFormat);
-    QString fileExtension = ui->lineEdit_2->text();
-    mysetting->setValue("regularFileSearch/fileExtension",fileExtension);
-    QString regularExpressionStr = ui->lineEdit_3->text();
-    mysetting->setValue("regularFileSearch/regularExpressionStr",regularExpressionStr);
 
-    myconfig->setValue("mainwindow/tagList",tagList.join(","));
     delete ui;
 }
 
@@ -195,7 +185,7 @@ void Regular_file_search::saveContent(){
     }
     if (isRegularExpressionStrChange){
         isRegularExpressionStrChange=false;
-        QString configName = QString::number(id)+"-regularFileReplacement/regularExpression";
+        QString configName = QString::number(id)+"-regularFileSearch/regularExpression";
         myconfig->setValue(configName,regularExpressionStr);
     }
 
@@ -205,6 +195,6 @@ void Regular_file_search::myload2(){
     QString fileExtension = myconfig->value(QString::number(id)+"-regularFileSearch/fileExtension").toString();
     if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
 
-    QString regularExpression = myconfig->value(QString::number(id)+"-regularFileReplacement/regularExpression").toString();
+    QString regularExpression = myconfig->value(QString::number(id)+"-regularFileSearch/regularExpression").toString();
     if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
 }
