@@ -43,6 +43,7 @@ regex_find::~regex_find()
 
     //myconfig->setValue("mainwindow/tagList",tagList.join(","));
     //myMainWindow->saveTag();
+    //alwaysSaveContent();
     delete ui;
 }
 

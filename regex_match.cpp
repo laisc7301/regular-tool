@@ -30,7 +30,7 @@ regex_match::regex_match(QWidget *parent) :
 
 regex_match::~regex_match()
 {
-
+    //alwaysSaveContent();
     delete ui;
 }
 

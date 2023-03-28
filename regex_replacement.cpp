@@ -34,7 +34,7 @@ regex_replacement::regex_replacement(QWidget *parent) :
 
 regex_replacement::~regex_replacement()
 {
-
+    //alwaysSaveContent();
     delete ui;
 }
 

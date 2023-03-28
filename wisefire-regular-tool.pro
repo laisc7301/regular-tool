@@ -14,28 +14,24 @@ SOURCES += \
     load_thread.cpp \
     main.cpp \
     mainwindow.cpp \
-    mainwindow_thread.cpp \
     regex_find.cpp \
     regex_match.cpp \
     regex_replacement.cpp \
     regular_file_replacement.cpp \
     regular_file_search.cpp \
-    replacement_thread.cpp \
-    save_thread.cpp
+    replacement_thread.cpp
 
 HEADERS += \
     about.h \
     global.h \
     load_thread.h \
     mainwindow.h \
-    mainwindow_thread.h \
     regex_find.h \
     regex_match.h \
     regex_replacement.h \
     regular_file_replacement.h \
     regular_file_search.h \
-    replacement_thread.h \
-    save_thread.h
+    replacement_thread.h
 
 FORMS += \
     about.ui \

@@ -23,7 +23,7 @@ Regular_file_replacement::Regular_file_replacement(QWidget *parent) :
 
 Regular_file_replacement::~Regular_file_replacement()
 {
-
+    //alwaysSaveContent();
     delete ui;
 }
 

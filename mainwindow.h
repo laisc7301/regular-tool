@@ -26,6 +26,8 @@ public:
 public slots:
     void myload2();
 
+private slots:
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;

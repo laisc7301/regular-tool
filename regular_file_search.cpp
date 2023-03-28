@@ -23,7 +23,7 @@ Regular_file_search::Regular_file_search(QWidget *parent) :
 Regular_file_search::~Regular_file_search()
 {
 
-
+    //alwaysSaveContent();
     delete ui;
 }
 

@@ -22,7 +22,6 @@
 
 #include <QMdiSubWindow>
 
-QTimer *timer2 = new QTimer();
 QTimer *timer3 = new QTimer();
 
 MainWindow::MainWindow(QWidget *parent)
@@ -304,4 +303,29 @@ void MainWindow::printIdList(){
 void MainWindow::myload2()
 {
     showTag();
+}
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+
+
+    for(int i=0;i<nextId;i++){
+        QString mytype = tagList.at(i);
+        if(mytype=="regex_find"){
+            regex_find *regex_find1 = (regex_find*)widgetList.at(i);
+            regex_find1->alwaysSaveContent();
+        }else if(mytype=="regex_match"){
+            regex_match *regex_match1 = (regex_match*)widgetList.at(i);
+            regex_match1->alwaysSaveContent();
+        }else if(mytype=="regex_replacement"){
+            regex_replacement *regex_replacement1 = (regex_replacement*)widgetList.at(i);
+            regex_replacement1->alwaysSaveContent();
+        }else if(mytype=="Regular_file_search"){
+            Regular_file_search *regular_file_search1 = (Regular_file_search*)widgetList.at(i);
+            regular_file_search1->alwaysSaveContent();
+        }else if(mytype=="Regular_file_replacement"){
+            Regular_file_replacement *regular_file_replacement1 = (Regular_file_replacement*)widgetList.at(i);
+            regular_file_replacement1->alwaysSaveContent();
+        }
+    }
+
 }
