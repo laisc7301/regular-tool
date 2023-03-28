@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>446</height>
+    <width>641</width>
+    <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,6 +85,13 @@
    </item>
    <item>
     <widget class="QTextEdit" name="textEdit"/>
+   </item>
+   <item>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

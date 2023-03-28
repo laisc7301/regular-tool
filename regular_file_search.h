@@ -2,6 +2,7 @@
 #define REGULAR_FILE_SEARCH_H
 
 #include "load_thread.h"
+#include "search_thread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -26,6 +27,16 @@ public:
     void saveContent();
     void alwaysSaveContent();
     load_thread load2;
+    search_thread searchThread;
+
+    void search();
+
+public slots:
+    void getmsg(QString msg);
+
+    void setProgressBar(int value);
+
+    void threadFinish();
 
 private slots:
     void on_pushButton_clicked();

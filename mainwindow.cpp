@@ -217,7 +217,7 @@ void MainWindow::saveTag(){
 }
 
 void MainWindow::removeid(int id){
-    qDebug()<<QString::number(id);
+    //qDebug()<<QString::number(id);
     QString mytype0 = tagList.at(id);
     if(mytype0=="regex_find"){
         myconfig->remove(QString::number(id)+"-regexFind");

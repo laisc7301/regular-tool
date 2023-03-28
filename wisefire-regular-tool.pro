@@ -19,7 +19,8 @@ SOURCES += \
     regex_replacement.cpp \
     regular_file_replacement.cpp \
     regular_file_search.cpp \
-    replacement_thread.cpp
+    replacement_thread.cpp \
+    search_thread.cpp
 
 HEADERS += \
     about.h \
@@ -31,7 +32,8 @@ HEADERS += \
     regex_replacement.h \
     regular_file_replacement.h \
     regular_file_search.h \
-    replacement_thread.h
+    replacement_thread.h \
+    search_thread.h
 
 FORMS += \
     about.ui \

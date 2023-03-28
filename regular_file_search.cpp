@@ -2,6 +2,7 @@
 #include "ui_regular_file_search.h"
 #include "global.h"
 #include "load_thread.h"
+#include "search_thread.h"
 
 #include <QFileDialog>
 #include <QDebug>
@@ -15,7 +16,9 @@ Regular_file_search::Regular_file_search(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+    QObject::connect(&searchThread, SIGNAL(sendmsg(QString)), this, SLOT(getmsg(QString)));
+    QObject::connect(&searchThread, SIGNAL(setProgressBar(int)), this, SLOT(setProgressBar(int)));
+    QObject::connect(&searchThread, SIGNAL(finish()), this, SLOT(threadFinish()));
     QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
     load2.start();
 }
@@ -33,8 +36,22 @@ void Regular_file_search::on_pushButton_clicked()
     ui->lineEdit->setText(filename);
 }
 
+void Regular_file_search::on_pushButton_2_clicked(){
+    QString dirpath = ui->lineEdit->text();
+    QString filter = ui->lineEdit_2->text();
+    QString regularExpressionStr = ui->lineEdit_3->text();
+    if(regularExpressionStr=="")return;
+    ui->textEdit->setText("");
+    ui->progressBar->setValue(0);
 
-void Regular_file_search::on_pushButton_2_clicked()
+    searchThread.url=dirpath;
+    searchThread.filter=filter;
+    searchThread.regularExpression=regularExpressionStr;
+    ui->pushButton_2->setEnabled(false);
+    searchThread.start();
+
+}
+void Regular_file_search::search()
 {
     if(ui->lineEdit_3->text()=="")return;
 
@@ -46,7 +63,7 @@ void Regular_file_search::on_pushButton_2_clicked()
 
 
     QString out1="";
-    QString resultout1 = "";
+
     foreach (auto fileurl, fileList) {
 
         //out1 += fileurl + "\n";
@@ -82,7 +99,7 @@ void Regular_file_search::on_pushButton_2_clicked()
         int length = 0;
         int endIndex = 0;
         QStringList result1;
-        QString result2 = "";
+
         for(;endIndex < inputStr.length();){
             match = regularExpression.match(inputStr, endIndex);
 
@@ -99,7 +116,9 @@ void Regular_file_search::on_pushButton_2_clicked()
             }
 
         }
+        QString resultout1 = "";
         QString result1_length = QString::number(result1.length());
+        QString result2 = "";
         if(result1.length()>0){
             result2 = "在" + fileurl + "找到 " + result1_length + " 处匹配：\n";
             QString result3 = result1.join("\n");
@@ -208,4 +227,19 @@ void Regular_file_search::myload2(){
 
     QString regularExpression = myconfig->value(QString::number(id)+"-regularFileSearch/regularExpression").toString();
     if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
+}
+
+
+
+void Regular_file_search::getmsg(QString msg)
+{
+ui->textEdit->append(msg);
+}
+void Regular_file_search::setProgressBar(int value)
+{
+    ui->progressBar->setValue(value);
+}
+
+void Regular_file_search::threadFinish(){
+    ui->pushButton_2->setEnabled(true);
 }
