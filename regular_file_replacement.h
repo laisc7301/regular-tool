@@ -26,6 +26,8 @@ public:
     bool isRegularExpressionStrChange=false;
     QString replace="";
     bool isReplaceChange=false;
+    QString myURL="";
+    bool isMyURLChange=false;
     void alwaysSaveContent();
 
     load_thread load2;
@@ -51,6 +53,8 @@ private slots:
     void on_lineEdit_4_textChanged(const QString &arg1);
 
     void on_toolButton_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::Regular_file_replacement *ui;

@@ -189,6 +189,11 @@ void Regular_file_search::on_lineEdit_2_textChanged(const QString &arg1)
     isFileExtensionChange = true;
 }
 
+void Regular_file_search::on_lineEdit_textChanged(const QString &arg1)
+{
+    myURL = ui->lineEdit->text();
+    isMyURLChange = true;
+}
 
 void Regular_file_search::on_toolButton_clicked()
 {
@@ -207,7 +212,11 @@ void Regular_file_search::saveContent(){
         QString configName = QString::number(id)+"-regularFileSearch/regularExpression";
         myconfig->setValue(configName,regularExpressionStr);
     }
-
+    if (isMyURLChange){
+        isMyURLChange=false;
+        QString configName = QString::number(id)+"-regularFileSearch/url";
+        myconfig->setValue(configName,myURL);
+    }
 
 }
 
@@ -219,14 +228,20 @@ void Regular_file_search::alwaysSaveContent(){
         QString configName2 = QString::number(id)+"-regularFileSearch/regularExpression";
         myconfig->setValue(configName2,regularExpressionStr);
 
+        QString configName3 = QString::number(id)+"-regularFileSearch/url";
+        myconfig->setValue(configName3,myURL);
 
 }
+
 void Regular_file_search::myload2(){
     QString fileExtension = myconfig->value(QString::number(id)+"-regularFileSearch/fileExtension").toString();
     if(fileExtension!="")ui->lineEdit_2->setText(fileExtension);
 
     QString regularExpression = myconfig->value(QString::number(id)+"-regularFileSearch/regularExpression").toString();
     if(regularExpression!="")ui->lineEdit_3->setText(regularExpression);
+
+    myURL = myconfig->value(QString::number(id)+"-regularFileSearch/url").toString();
+    if(myURL!="")ui->lineEdit->setText(myURL);
 }
 
 
@@ -243,3 +258,6 @@ void Regular_file_search::setProgressBar(int value)
 void Regular_file_search::threadFinish(){
     ui->pushButton_2->setEnabled(true);
 }
+
+
+

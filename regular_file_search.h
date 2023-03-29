@@ -29,6 +29,9 @@ public:
     load_thread load2;
     search_thread searchThread;
 
+    QString myURL="";
+    bool isMyURLChange=false;
+
     void search();
 
 public slots:
@@ -52,6 +55,8 @@ private slots:
     void on_toolButton_clicked();
 
     void myload2();
+    void on_lineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::Regular_file_search *ui;
 };

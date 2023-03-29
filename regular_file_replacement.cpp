@@ -102,7 +102,11 @@ void Regular_file_replacement::on_lineEdit_4_textChanged(const QString &arg1)
     isReplaceChange = true;
 }
 
-
+void Regular_file_replacement::on_lineEdit_textChanged(const QString &arg1)
+{
+    myURL = ui->lineEdit->text();
+    isMyURLChange = true;
+}
 void Regular_file_replacement::on_toolButton_clicked()
 {
     myMainWindow->removeid(id);
@@ -126,6 +130,12 @@ void Regular_file_replacement::saveContent(){
         myconfig->setValue(configName,replace);
     }
 
+    if (isMyURLChange){
+        isMyURLChange=false;
+        QString configName = QString::number(id)+"-regularFileReplacement/url";
+        myconfig->setValue(configName,myURL);
+    }
+
 }
 
 void Regular_file_replacement::alwaysSaveContent(){
@@ -139,6 +149,9 @@ void Regular_file_replacement::alwaysSaveContent(){
         QString configName3 = QString::number(id)+"-regularFileReplacement/replace";
         myconfig->setValue(configName3,replace);
 
+        QString configName4 = QString::number(id)+"-regularFileReplacement/url";
+        myconfig->setValue(configName4,myURL);
+
 
 }
 void Regular_file_replacement::myload2(){
@@ -151,4 +164,10 @@ void Regular_file_replacement::myload2(){
 
     QString replace = myconfig->value(QString::number(id)+"-regularFileReplacement/replace").toString();
     if(replace!="")ui->lineEdit_4->setText(replace);
+
+    myURL = myconfig->value(QString::number(id)+"-regularFileReplacement/url").toString();
+    if(myURL!="")ui->lineEdit->setText(myURL);
 }
+
+
+

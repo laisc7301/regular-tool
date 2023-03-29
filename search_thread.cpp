@@ -105,8 +105,9 @@ QStringList search_thread::getFileListUnderDir(const QString &dirPath2,const QSt
             fileList.append(fileList2);
         }
         if(filter2==""){
-            fileList.append(fileInfo.absoluteFilePath());
-
+            if(fileInfo.isFile()){
+                fileList.append(fileInfo.absoluteFilePath());
+            }
         }else{
             QStringList filterlist = filter2.split(",");
             if(fileInfo.isFile())

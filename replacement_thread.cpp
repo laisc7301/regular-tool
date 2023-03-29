@@ -15,14 +15,14 @@ void replacement_thread::run()
     //qDebug()<<"replacement_thread";
     //qDebug()<<number;
     //QThread::sleep(3);
-//    int i=0;
-//    for(;;){
-//    emit sendmsg(QString::number(i++));
+    //    int i=0;
+    //    for(;;){
+    //    emit sendmsg(QString::number(i++));
 
-//    QString threadId = QString::number(quintptr(QThread::currentThreadId()));
-//    emit sendmsg(threadId);
-//    QThread::sleep(1);
-//    }
+    //    QString threadId = QString::number(quintptr(QThread::currentThreadId()));
+    //    emit sendmsg(threadId);
+    //    QThread::sleep(1);
+    //    }
 
     doReplace();
 }
@@ -92,8 +92,9 @@ QStringList replacement_thread::getFileListUnderDir(const QString &dirPath,const
             fileList.append(fileList2);
         }
         if(filter==""){
-            fileList.append(fileInfo.absoluteFilePath());
-
+            if(fileInfo.isFile()){
+                fileList.append(fileInfo.absoluteFilePath());
+            }
         }else{
             QStringList filterlist = filter.split(",");
             if(fileInfo.isFile())
