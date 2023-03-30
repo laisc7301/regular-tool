@@ -122,14 +122,6 @@ void regex_find::search()
 
 }
 
-
-void regex_find::on_toolButton_clicked()
-{
-    myMainWindow->removeid(id);
-
-    qmdiArea->closeActiveSubWindow();
-}
-
 void regex_find::saveContent(){
     if (isRegularExpressionStrChange){
         isRegularExpressionStrChange=false;
@@ -162,4 +154,13 @@ void regex_find::myload2()
     QString str2 = myconfig->value(QString::number(id)+"-regexFind/SearchStr").toString();
     if(str2!="")ui->textEdit->setText(str2);
     searchStr = str2;
+}
+
+
+
+void regex_find::closeEvent(QCloseEvent *event)
+{
+
+    myMainWindow->removeid(id);
+
 }

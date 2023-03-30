@@ -21,6 +21,8 @@ public:
     void removeid(int id);
     void printIdList();
     void saveTag();
+    void reloadTag();
+    void saveAll();
     load_thread load2;
 
 public slots:

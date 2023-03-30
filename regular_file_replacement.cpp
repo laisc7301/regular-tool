@@ -107,11 +107,7 @@ void Regular_file_replacement::on_lineEdit_textChanged(const QString &arg1)
     myURL = ui->lineEdit->text();
     isMyURLChange = true;
 }
-void Regular_file_replacement::on_toolButton_clicked()
-{
-    myMainWindow->removeid(id);
-    qmdiArea->closeActiveSubWindow();
-}
+
 
 void Regular_file_replacement::saveContent(){
     if (isFileExtensionChange){
@@ -170,4 +166,9 @@ void Regular_file_replacement::myload2(){
 }
 
 
+void Regular_file_replacement::closeEvent(QCloseEvent *event)
+{
 
+    myMainWindow->removeid(id);
+
+}

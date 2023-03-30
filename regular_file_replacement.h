@@ -41,6 +41,7 @@ public slots:
 
     void myload2();
 private slots:
+    void closeEvent(QCloseEvent *event);
 
     void on_pushButton_clicked();
 
@@ -51,8 +52,6 @@ private slots:
     void on_lineEdit_3_textChanged(const QString &arg1);
 
     void on_lineEdit_4_textChanged(const QString &arg1);
-
-    void on_toolButton_clicked();
 
     void on_lineEdit_textChanged(const QString &arg1);
 

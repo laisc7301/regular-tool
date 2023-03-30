@@ -40,21 +40,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QToolButton" name="toolButton">
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>X</string>
-       </property>
-       <property name="autoRaise">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>

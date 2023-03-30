@@ -93,11 +93,6 @@ void regex_match::on_textEdit_textChanged()
 }
 
 
-void regex_match::on_toolButton_clicked()
-{
-    myMainWindow->removeid(id);
-    qmdiArea->closeActiveSubWindow();
-}
 void regex_match::saveContent(){
     if (isRegularExpressionStrChange){
         isRegularExpressionStrChange=false;
@@ -132,4 +127,11 @@ void regex_match::myload2()
     QString str2 = myconfig->value(QString::number(id)+"-regexMatch/inputStr").toString();
     if(str2!="")ui->textEdit->setText(str2);
     inputStr = str2;
+}
+
+void regex_match::closeEvent(QCloseEvent *event)
+{
+
+    myMainWindow->removeid(id);
+
 }

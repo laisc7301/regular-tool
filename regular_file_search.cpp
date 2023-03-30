@@ -195,12 +195,6 @@ void Regular_file_search::on_lineEdit_textChanged(const QString &arg1)
     isMyURLChange = true;
 }
 
-void Regular_file_search::on_toolButton_clicked()
-{
-    myMainWindow->removeid(id);
-    qmdiArea->closeActiveSubWindow();
-}
-
 void Regular_file_search::saveContent(){
     if (isFileExtensionChange){
         isFileExtensionChange=false;
@@ -259,5 +253,10 @@ void Regular_file_search::threadFinish(){
     ui->pushButton_2->setEnabled(true);
 }
 
+void Regular_file_search::closeEvent(QCloseEvent *event)
+{
 
+    myMainWindow->removeid(id);
+
+}
 

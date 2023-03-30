@@ -78,11 +78,6 @@ void regex_replacement::on_textEdit_textChanged()
 }
 
 
-void regex_replacement::on_toolButton_clicked()
-{
-    myMainWindow->removeid(id);
-    qmdiArea->closeActiveSubWindow();
-}
 void regex_replacement::saveContent(){
     if (isRegularExpressionChange){
         isRegularExpressionChange=false;
@@ -126,4 +121,11 @@ void regex_replacement::myload2()
         //std::cout << "not null" << std::endl;
         ui->textEdit->setText(str3);
     }
+}
+
+void regex_replacement::closeEvent(QCloseEvent *event)
+{
+
+    myMainWindow->removeid(id);
+
 }

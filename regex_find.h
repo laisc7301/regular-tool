@@ -28,6 +28,8 @@ public slots:
     void myload2();
 
 private slots:
+    void closeEvent(QCloseEvent *event);
+
     void on_pushButton_2_clicked();
 
     //void on_pushButton_clicked();
@@ -39,8 +41,6 @@ private slots:
     void on_pushButton_3_clicked();
 
     void search();
-
-    void on_toolButton_clicked();
 
 private:
     Ui::regex_find *ui;

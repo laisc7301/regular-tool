@@ -29,13 +29,13 @@ public slots:
     void myload2();
 
 private slots:
+    void closeEvent(QCloseEvent *event);
+
     void on_pushButton_clicked();
 
     void on_lineEdit_textChanged(const QString &arg1);
 
     void on_textEdit_textChanged();
-
-    void on_toolButton_clicked();
 
 private:
     Ui::regex_match *ui;

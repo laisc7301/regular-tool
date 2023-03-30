@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     qmdiArea = ui->mdiArea;
 
     ui->mdiArea->setViewMode(QMdiArea::TabbedView);
+    ui->mdiArea->setTabsClosable(true);
+    ui->mdiArea->setTabsMovable(true);
 
     QObject::connect(&load2, SIGNAL(loadback()), this, SLOT(myload2()));
     load2.start();
@@ -306,8 +308,11 @@ void MainWindow::myload2()
 }
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    saveAll();
+}
 
 
+void MainWindow::saveAll(){
     for(int i=0;i<nextId;i++){
         QString mytype = tagList.at(i);
         if(mytype=="regex_find"){
@@ -327,5 +332,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
             regular_file_replacement1->alwaysSaveContent();
         }
     }
-
+}
+void MainWindow::reloadTag(){
+    saveAll();
+    ui->mdiArea->closeAllSubWindows();
+    showTag();
 }
