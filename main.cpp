@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "global.h"
 
-QString version = "v1.4.6";
+QString version = "v1.4.7";
 MainWindow *myMainWindow;
 QMdiArea *qmdiArea = NULL;
 QSettings *myconfig = new QSettings("config.ini", QSettings::IniFormat);

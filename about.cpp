@@ -11,6 +11,7 @@ About::About(QWidget *parent) :
 
     ui->label_4->setOpenExternalLinks(true);
     ui->label_6->setOpenExternalLinks(true);
+    ui->label_8->setOpenExternalLinks(true);
     QString qtVersion = QT_VERSION_STR;
     QString qtVersionOut = "基于Qt" + qtVersion + "开发";
     ui->label_2->setText(qtVersionOut);
