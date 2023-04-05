@@ -56,10 +56,10 @@ void search_thread::doSearch(){
         QString result1_length = QString::number(result1.length());
         QString result2 = "";
         if(result1.length()>0){
-            result2 = "在" + fileurl + "找到 " + result1_length + " 处匹配：";
+            result2 = "在" + fileurl + "找到 " + result1_length + " 处匹配：\n";
             emit sendmsg(result2);
             foreach (auto result4, result1) {
-                emit sendmsg(result4);
+                emit sendmsg(result4 + "\n");
             }
         }
         int progressBarValue=i*100/(fileList.size()-1);

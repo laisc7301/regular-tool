@@ -73,7 +73,7 @@ void regex_match::on_pushButton_clicked()
     result2 += "共找到 " + result1_length + " 处匹配：";
     QStringListIterator result1_Iterator(result1);
     for(;result1_Iterator.hasNext();){
-        result2 += "\n" + result1_Iterator.next();
+        result2 += "\n" + result1_Iterator.next() + "\n";
     }
     ui->textEdit_2->setText(result2);
 }
